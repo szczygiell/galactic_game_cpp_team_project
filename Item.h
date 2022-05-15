@@ -3,9 +3,9 @@
 class Item
 {
     private:
-        std::string name;
-        int value;
-        int kind;
+        std::string iname;
+        int ivalue;
+        int ikind;
         // which value represents which kind:
         // 0: health
         // 1: weapon_damage
@@ -13,18 +13,18 @@ class Item
     public:
         Item(const std::string n, const int v, const int k)
         {
-            name = n;
-            value = v;
-            kind = k;
+            iname = n;
+            ivalue = v;
+            ikind = k;
         }
 
-        std::string get_name() {return name;};
-        int get_value() {return value;};
-        int get_kind() {return kind;};
+        std::string get_iname() {return iname;};
+        int get_ivalue() {return ivalue;};
+        int get_ikind() {return ikind;};
 
         void print()
         {
-            std::cout << "(" << name << ", " << value << ")" << std::endl;
+            std::cout << "(" << iname << ", " << ivalue << ")" << std::endl;
         }
 
 

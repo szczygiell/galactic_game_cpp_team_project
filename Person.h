@@ -11,6 +11,7 @@ class Person
         {
             health = h;
         }
+        ~Person();
         virtual int reduce_health(int &damage)
         {
             return this->health-damage;
@@ -23,5 +24,4 @@ class Person
         {
             health = new_health;
         }
-        ~Person();
 };

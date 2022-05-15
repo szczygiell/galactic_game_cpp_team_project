@@ -1,7 +1,7 @@
 tests: tests.o Player.o Person.o
 	g++ -o tests tests.o Player.o Person.o
 
-tests.o: tests.cpp
+tests.o: tests.cpp Player.h Person.h Enemy.h
 	g++ -c tests.cpp
 
 Player.o: Player.cpp

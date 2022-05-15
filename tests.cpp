@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Person.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Item.h"
 
 using namespace std;
 
@@ -13,7 +15,15 @@ void create_player(int mh, int wd, int sh, int h)
         cout << "Create player passed" << endl;
     else
         cout << "Error in create player"<< endl;
-    
+}
+
+void create_enemy(int h, int wd, int ek)
+{
+    Enemy *enemy = new Enemy(h, wd, ek);
+    if(enemy->get_ehealth() == h && 
+        enemy->get_ewd() == wd && enemy->get_ekind() == ek)
+        cout << "Create enemy passed" << endl;
+    else cout<< "Error in create enemy" << endl;
 }
 
 void heal_player(const int &potion)
@@ -46,6 +56,22 @@ void pick_up_player(int new_wd)
         cout << "Error in pick up player"<< endl;
 }
 
+void create_item(const string n, const int v, const int k)
+{
+    Item *item = new Item(n, v, k);
+    if(item->get_iname() == n && 
+        item->get_ivalue() == v && item->get_ikind() == k)
+        cout << "Create item passed" << endl;
+    else cout<< "Error in create item" << endl;
+}
+
+void item_print_test(const string n, const int v, const int k)
+{
+    Item *item = new Item(n, v, k);
+    item->print();
+    cout << "Item print test passed" << endl;
+}
+
 
 int main()
 {
@@ -53,6 +79,10 @@ int main()
     heal_player(5);
     max_heal_player(15);
     pick_up_player(5);
-    cout << "\n\nEnd of tests" << endl;
+    create_enemy(15, 20, 3);
+    create_item("Laser", 10, 1);
+    item_print_test("Laser", 10, 1);
+    
+    cout << "\nEnd of tests" << endl;
 
 }
