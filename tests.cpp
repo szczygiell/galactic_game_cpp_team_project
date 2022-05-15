@@ -36,7 +36,7 @@ void max_heal_player(const int &potion)
         cout << "Error in max heal player"<< endl;
 }
 
-void pick_up_player(int &new_wd)
+void pick_up_player(int new_wd)
 {
     Player *player = new Player(10, 20, 5, 5);
     player->pick_up(new_wd);

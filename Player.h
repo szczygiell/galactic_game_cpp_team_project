@@ -26,7 +26,7 @@ class Player : public Person
         int get_mh() {return this->max_health;};
         int get_wd() {return this->weapon_damage;};
         int get_sh() {return this->shield;};
-        void pick_up(int &new_wd);
+        void pick_up(const int& new_wd);
         void heal(const int &potion);
 };
         

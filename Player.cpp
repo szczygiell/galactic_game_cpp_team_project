@@ -25,9 +25,9 @@ void Player::set_sh(int sh)
     }
     shield = sh;
 }
-void Player::pick_up(int &new_wd)
+void Player::pick_up(const int& new_wd)
 {
-    Player::weapon_damage += new_wd;
+    set_wd(this->weapon_damage + new_wd);
 }
 void Player::heal(const int &potion)
 {
