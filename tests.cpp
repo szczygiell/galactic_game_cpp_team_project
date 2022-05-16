@@ -3,6 +3,11 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Item.h"
+#include "Chest.h"
+
+//TODO
+// TESTY DLA CHEST
+
 
 using namespace std;
 
@@ -51,7 +56,7 @@ void pick_up_player(int new_wd)
     Player *player = new Player(10, 20, 5, 5);
     player->pick_up(new_wd);
     if (player->get_wd() == 10)
-        cout << "Pick up player passed" << endl;
+       cout << "Pick up player passed" << endl;
     else
         cout << "Error in pick up player"<< endl;
 }
@@ -72,6 +77,13 @@ void item_print_test(const string n, const int v, const int k)
     cout << "Item print test passed" << endl;
 }
 
+void test_chest()
+{
+    Chest skrzyneczka;
+    skrzyneczka.add_items();
+    skrzyneczka[5].print();
+}
+
 
 int main()
 {
@@ -82,6 +94,7 @@ int main()
     create_enemy(15, 20, 3);
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
+    test_chest();
     
     cout << "\nEnd of tests" << endl;
 
