@@ -11,6 +11,6 @@ class Gameplay
 
     public:
         Gameplay(){}
-        tuple<int, int, int, int, int> get_state(Player& player, Enemy& enemy);
+        tuple<int, int, int, int, int, int> get_state(Player& player, Enemy& enemy);
         void disp_level(Player& player, Enemy& enemy);
 };
