@@ -1,9 +1,9 @@
 #include <iostream>
 #pragma once
-class Input
+class Action
 {
     public:
-        Input() {}
+        Action() {}
 
         int get_choice();
         bool start_game();

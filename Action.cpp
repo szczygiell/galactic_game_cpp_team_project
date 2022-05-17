@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int Input::get_choice()
+int Action::get_choice()
 {
     int c;
     c = getchar();
@@ -12,7 +12,7 @@ int Input::get_choice()
 }
 
 
-bool Input::start_game()
+bool Action::start_game()
 {
     
 }
