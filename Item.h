@@ -1,4 +1,5 @@
 #include <iostream>
+#pragma once
 
 class Item
 {
@@ -11,6 +12,7 @@ class Item
         // 1: weapon_damage
         // 2: shield
     public:
+        Item(){}
         Item(const std::string n, const int v, const int k)
         {
             iname = n;
@@ -26,10 +28,5 @@ class Item
         {
             std::cout << "(" << iname << ", " << ivalue << ")" << std::endl;
         }
-
-
-        
-
-
         
 };

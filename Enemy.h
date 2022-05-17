@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Person.h"
+#pragma once
 
 //TODO
 // klasa enemy DONE
