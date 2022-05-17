@@ -4,7 +4,7 @@ tests: tests.o Player.o Person.o Gameplay.o
 tests.o: tests.cpp Player.h Person.h Enemy.h Item.h Chest.h Action.h Gameplay.h
 	g++ -c tests.cpp
 
-Gameplay.o: Gameplay.cpp Player.h Enemy.h
+Gameplay.o: Gameplay.cpp Player.h Enemy.h Chest.h
 	g++ -c Gameplay.cpp
 
 Item.o: Item.cpp

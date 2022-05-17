@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Item.h"
+#pragma once
 
 // TODO
 // klasa Chest
@@ -12,21 +13,7 @@
 
 class Chest
 {
-    /*
-    const int item_number;
-    Item* items;
 
-    public:
-        Chest():item_number(10), items(Item[10]);
-
-        void add_item()
-        {
-            
-            for(int i=0; i<item_number; i++)
-            {
-                items[i] = Item::Item
-            }     
-    */
     private:
         Item* items;
         int item_number;
@@ -51,9 +38,13 @@ class Chest
             items[7] = Item("shield 3", 15, 2);
             items[8] = Item("potion 2", 10, 0);
             items[9] = Item("potion 3", 15, 0);
-        }       
+        }
 
-    
+        // propozycja żeby zrobić skrzynię która miała by trzy kontenery w sobie
+        // np chest[0] posidałby bron chest[1] tarcze itd
+        // i dopiero w tych chest[i] bylo by kilka elementow danego rodzaju
+        // mam wrazenie ze wtedy ltwiej bedzie to przeniesc do gameplay
+
         Item operator[](int const id)
         {
             return this->items[id];

@@ -16,8 +16,8 @@ using namespace std;
 void create_player(int mh, int wd, int sh, int h)
 {
     Player *player = new Player(h, mh, wd, sh);
-    if (player->get_health() == h && 
-        player->get_mh() == mh && player->get_wd() == wd && 
+    if (player->get_health() == h &&
+        player->get_mh() == mh && player->get_wd() == wd &&
         player->get_sh() == sh)
         cout << "Create player passed" << endl;
     else
@@ -27,7 +27,7 @@ void create_player(int mh, int wd, int sh, int h)
 void create_enemy(int h, int wd, int ek)
 {
     Enemy *enemy = new Enemy(h, wd, ek);
-    if(enemy->get_ehealth() == h && 
+    if(enemy->get_ehealth() == h &&
         enemy->get_ewd() == wd && enemy->get_ekind() == ek)
         cout << "Create enemy passed" << endl;
     else cout<< "Error in create enemy" << endl;
@@ -66,7 +66,7 @@ void pick_up_player(int new_wd)
 void create_item(const string n, const int v, const int k)
 {
     Item *item = new Item(n, v, k);
-    if(item->get_iname() == n && 
+    if(item->get_iname() == n &&
         item->get_ivalue() == v && item->get_ikind() == k)
         cout << "Create item passed" << endl;
     else cout<< "Error in create item" << endl;
@@ -101,6 +101,7 @@ int main()
     Enemy enemy(50, 3, 12);
     Gameplay game;
     game.disp_level(player, enemy);
+    game.disp_chest(player);
     cout << "\nEnd of tests" << endl;
 
 }
