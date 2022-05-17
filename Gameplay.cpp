@@ -22,7 +22,7 @@ tuple<int, int, int, int, int, int> Gameplay::get_state(Player& player, Enemy& e
 
 void Gameplay::disp_level(Player& player, Enemy& enemy)
 {
-    tuple params = Gameplay::get_state(player, enemy);
+    auto params = Gameplay::get_state(player, enemy);
     disp_border();
     cout << "\n";
     cout << "\t\t\t\t\tCurrent stage: " << endl;;  //wpisujemy etap
@@ -30,7 +30,7 @@ void Gameplay::disp_level(Player& player, Enemy& enemy)
     cout << "\t\t(1) " << endl;
     cout << "\t\t(2) " << endl;
     cout << "\t\t(3) " << endl;
-    cout << "\n"; 
+    cout << "\n";
     cout << "\n";
     cout << "\t**Player (You)**" << endl;
     cout << "\tAttack points: " << get<0>(params) << endl; // player.atrybuty
