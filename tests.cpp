@@ -4,6 +4,8 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "Chest.h"
+#include "Input.h"
+#include "Gameplay.h"
 
 //TODO
 // TESTY DLA CHEST
@@ -95,7 +97,8 @@ int main()
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
     test_chest();
-    
+    Gameplay game;
+    game.disp_level(10, 20, 5, 4, 3);
     cout << "\nEnd of tests" << endl;
 
 }
