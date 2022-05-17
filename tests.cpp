@@ -97,8 +97,10 @@ int main()
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
     test_chest();
+    Player player(10, 5, 3, 1);
+    Enemy enemy(50, 3, 12);
     Gameplay game;
-    game.disp_level(10, 20, 5, 4, 3);
+    game.disp_level(player, enemy);
     cout << "\nEnd of tests" << endl;
 
 }

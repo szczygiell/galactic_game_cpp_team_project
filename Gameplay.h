@@ -1,4 +1,6 @@
 #include <iostream>
+#include "Player.h"
+#include "Enemy.h"
 #pragma once
 
 
@@ -9,6 +11,6 @@ class Gameplay
 
     public:
         Gameplay(){}
-        void disp_level(const int& ph, const int& wd, const int& sh,
-                                const int& eh, const int& ewd);
+        tuple<int, int, int, int, int> get_state(Player& player, Enemy& enemy);
+        void disp_level(Player& player, Enemy& enemy);
 };
