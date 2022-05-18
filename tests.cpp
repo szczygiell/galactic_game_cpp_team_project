@@ -100,6 +100,31 @@ void test_pop_chest()
         skrzyneczka[i].print();
 }
 
+void test_enemy_take_damage(const int& dmg)
+{
+    Enemy *enemy = new Enemy(20, 2, 1);
+    enemy->take_damege(dmg);
+    if(enemy->get_ehealth() == (20-dmg))
+        cout << "enemy take_damage passed" << endl;
+    else
+        cout << "Error in enemy take_damage"<< endl;
+}
+
+void test_is_enemy_alive()
+{
+    Enemy *enemy = new Enemy(20, 2, 1);
+    enemy->take_damege(21);
+    if(enemy->is_alive() == true)
+        cout << "enemy is_alive passed" << endl;
+    else
+        cout << "Error in enemy is_alive"<< endl;
+}
+
+// void test_boss()
+// {
+
+// }
+
 
 int main()
 {
@@ -114,8 +139,10 @@ int main()
     Player player(10, 5, 3, 1);
     Enemy enemy(50, 3, 12);
     Gameplay game;
-    game.disp_level(player, enemy);
-    test_pop_chest();
+    game.disp_level(player, enemy); cout << "\n";
+    // test_pop_chest();
+    test_enemy_take_damage(7);
+    test_is_enemy_alive();
     cout << "\nEnd of tests" << endl;
 
 }

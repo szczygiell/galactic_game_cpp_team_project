@@ -13,7 +13,7 @@
 
 class Enemy: public Person
 {
-    private:
+    protected:
         int eweapon_damage;
         int ekind;
         //which value represents which ekind:
@@ -21,7 +21,10 @@ class Enemy: public Person
         //1: water
         //2: earth
         //3: air
-    
+
+        // czy nie lepiej byloby ograniczyć się do dwóch rodzajów?
+        // coś w stylu wiedzmina jeden miecz na potwory drugi na ludzi xd
+
     public:
         Enemy(int h, const int wd, int ek):Person(h)
         {
@@ -36,5 +39,30 @@ class Enemy: public Person
         void set_ehealth(int& new_health)
         {
             this->health += new_health;
+        }
+
+        void take_damege(const int& damage)
+        {
+            this->health -= damage;
+        }
+
+        bool dodge()
+        {
+            // pomysł jest następujący:
+            // możemy dodać szansę na unik ataku od bohatera.
+            // w trakcie każdego ataku włączałaby się ta funkcja i sprawdzała czy
+            // przeciwnik uniknął ataku czy nie
+            srand(time(0));
+            int chance = rand() % 10;
+            if(chance == 1)
+                return true;
+            return false;
+        }
+
+        bool is_alive()
+        {
+            if(this->health <= 0)
+                return true;
+            return false;
         }
 };

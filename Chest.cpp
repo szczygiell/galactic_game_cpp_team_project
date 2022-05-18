@@ -7,7 +7,7 @@ using namespace std;
 void Chest::add_items()
 {
     items[0] = Item("Kebab laser", 50, 1);
-    items[1] = Item("Spear of 1000 moms", 2000, 1);
+    items[1] = Item("Spear of 1000 moons", 2000, 1);
     items[2] = Item("Photon spear", 20, 2);
     items[3] = Item("Healing tears of Holy Mother", 30, 0);
     items[4] = Item("laser 2", 10, 1);
