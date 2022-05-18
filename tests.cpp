@@ -8,9 +8,6 @@
 #include "Gameplay.h"
 #include "Boss.h"
 
-//TODO
-// TESTY DLA CHEST
-
 
 using namespace std;
 
@@ -104,7 +101,7 @@ void test_pop_chest()
 void test_enemy_take_damage(const int& dmg)
 {
     Enemy *enemy = new Enemy(20, 2, 1);
-    enemy->take_damege(dmg);
+    enemy->take_damage(dmg);
     if(enemy->get_ehealth() == (20-dmg))
         cout << "enemy take_damage passed" << endl;
     else
@@ -114,28 +111,22 @@ void test_enemy_take_damage(const int& dmg)
 void test_is_enemy_alive()
 {
     Enemy *enemy = new Enemy(20, 2, 1);
-    enemy->take_damege(21);
-    if(enemy->is_alive() == true)
+    enemy->take_damage(21);
+    if(not enemy->is_alive())
         cout << "enemy is_alive passed" << endl;
     else
         cout << "Error in enemy is_alive"<< endl;
 }
 
-// trzeba zrobić operator== dla klasy Item
-// dla tego testu przy okazji będzie trzeba oczywiście poprawić makefile
-// ja już nie mogę tego zrobić bo muszę iść
-
-/*
 void create_test_boss(int h, int wd, int ek, Item &si)
 {
-    Boss *szefo = new Boss(h, wd, ek, si);
-    if(szefo->get_ehealth() == h && szefo->get_ewd() == wd
-    && szefo->get_ekind() == ek && szefo->get_bitem_info() == si)
+    Boss szefo = Boss(h, wd, ek, si);
+    if(szefo.get_ehealth() == h && szefo.get_ewd() == wd
+    && szefo.get_ekind() == ek && szefo.get_bitem_info() == si)
         cout << "Create boss passed" << endl;
     else cout<< "Error in create boss" << endl;
 }
-*/
-
+    
 int main()
 {
     create_player(10, 20, 5, 5);
@@ -146,13 +137,22 @@ int main()
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
     test_chest();
-    Player player(10, 5, 3, 1);
-    Enemy enemy(50, 3, 12);
+    Player player(100, 100, 3, 1);
+    Enemy enemy(50, 10, 1);
     Gameplay game;
-    game.disp_level(player, enemy); cout << "\n";
+    game.battle(player, enemy);
     // test_pop_chest();
     test_enemy_take_damage(7);
     test_is_enemy_alive();
+    Item * piwo = new Item("Piwo", 10, 1);
+    create_test_boss(10, 2, 4, *piwo);
     cout << "\nEnd of tests" << endl;
 
 }
+
+
+//POPRAWIC MECHANIKE WALKI
+//NAPISAC METODE WALKI Z BOSEM
+//NAPISAC OPCJE WYCHODZENIA Z GRY
+//RODZAJE ATAKU DO PLAYERA
+//FUNKCJA OTWIERANIA SKRZYN

@@ -41,10 +41,7 @@ class Enemy: public Person
             this->health += new_health;
         }
 
-        void take_damege(const int& damage)
-        {
-            this->health -= damage;
-        }
+        
 
         bool dodge()
         {
@@ -59,10 +56,24 @@ class Enemy: public Person
             return false;
         }
 
-        bool is_alive()
+        std::string get_name()
         {
-            if(this->health <= 0)
-                return true;
-            return false;
+            if(ekind == 0)
+                return "Ognisty żywiołak";
+            if(ekind == 1)
+                return "Baba wodna";
+            if(ekind == 2)
+                return "Twoja stara";
+            if(ekind == 3)
+                return "Twój stary";
+            else    
+                return "nieznany gatunek";
+        }
+
+        int deal_dmg()
+        {
+            srand(time(0));
+            int dmg = rand() % 11;
+            return eweapon_damage - dmg;
         }
 };

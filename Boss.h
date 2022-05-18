@@ -13,25 +13,25 @@ atrybuty zostały poprawione
 class Boss: public Enemy
 {
     private:
-        Item *special_item;
+        Item special_item;
 
     public:
 
         Boss(int h, const int wd, int ek, Item &si):Enemy(h, wd, ek)
         {
-            *special_item = si;
+            special_item = si;
         }
 
         Item get_bitem_info()
         {
-            return *this->special_item;
+            return this->special_item;
         }
 
         Item drop()
         {
             bool life = this->is_alive();
             if(life == false)
-                return *special_item;
+                return this->special_item;
         }
 
         void regeneration()

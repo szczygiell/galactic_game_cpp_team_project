@@ -23,4 +23,16 @@ class Person
         {
             health = new_health;
         }
+
+        virtual bool is_alive()
+        {
+            if(this->health <= 0)
+                return false;
+            return true;
+        }
+
+        virtual void take_damage(const int& damage)
+        {
+            this->health -= damage;
+        }
 };
