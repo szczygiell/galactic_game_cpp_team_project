@@ -1,8 +1,11 @@
-tests: tests.o Player.o Person.o Gameplay.o
-	g++ -o tests.out tests.o Player.o Person.o Gameplay.o
+tests: tests.o Player.o Person.o Gameplay.o Chest.o
+	g++ -o tests.out tests.o Player.o Person.o Gameplay.o Chest.o
 
-tests.o: tests.cpp Player.h Person.h Enemy.h Item.h Chest.h Action.h Gameplay.h
+tests.o: tests.cpp Player.h Person.h Enemy.h Item.h Chest.h Action.h Gameplay.h Chest.h
 	g++ -c tests.cpp
+
+Chest.o: Chest.cpp
+	g++ -c Chest.cpp
 
 Gameplay.o: Gameplay.cpp Player.h Enemy.h Chest.h
 	g++ -c Gameplay.cpp
@@ -17,4 +20,4 @@ Person.o: Person.cpp
 	g++ -c Person.cpp
 
 clean:
-	rm -f tests.o* Player.o Person.o Item.o Gameplay.o tests.exe
+	rm -f tests.o* Player.o Person.o Item.o Gameplay.o tests.exe Chest.o

@@ -28,5 +28,12 @@ class Item
         {
             std::cout << "(" << iname << ", " << ivalue << ")" << std::endl;
         }
-        
+
+        bool operator!=(Item const& item2)
+        {
+            if(this->iname == item2.iname)
+                return false;
+            return true;
+        }
+
 };

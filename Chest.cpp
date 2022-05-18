@@ -25,6 +25,27 @@ void Chest::add_items()
 //     {
 //         int idx = rand() % 10;
 //         get<i>(&items[idx])
-        
+
 //     }
 // }
+
+Item Chest::pop_item()
+{
+    srand(time(0));
+    int idx = rand() % 10;
+    Item sel_item =  items[idx];
+    Item* new_items = new Item[item_number -1];
+    int current = 0;
+    for(int i=0; i<item_number; i++)
+    {
+        if(items[i] != items[idx])
+        {
+            *(new_items + current) = *(items +i);
+            current++;
+        }
+    }
+    delete [] items;
+    items = new_items;
+    return sel_item;
+
+}

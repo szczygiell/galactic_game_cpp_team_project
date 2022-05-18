@@ -26,7 +26,10 @@ class Chest
         {
             items = new Item[10];
         }
-
+        Chest(int ammount):item_number(ammount)
+        {
+            items = new Item[item_number];
+        }
         int get_num() {return this->item_number;}
 
         void add_items();
@@ -37,5 +40,9 @@ class Chest
         // mam wrazenie ze wtedy ltwiej bedzie to przeniesc do gameplay
 
         Item operator[](int const id){return this->items[id];}
-        std::tuple<Item, Item, Item> generate_chest();
+        // std::tuple<Item, Item, Item> generate_chest();
+        //std::vector<Item> generate_chest();
+
+
+        Item pop_item();
 };

@@ -86,6 +86,20 @@ void test_chest()
     skrzyneczka[5].print();
 }
 
+void test_pop_chest()
+{
+    Chest skrzyneczka;
+    skrzyneczka.add_items();
+    for(int i=0; i<10;i++)
+        skrzyneczka[i].print();
+    cout<<endl;
+    Item rm_item = skrzyneczka.pop_item();
+    rm_item.print();
+    cout<<endl;
+    for(int i=0; i<9;i++)
+        skrzyneczka[i].print();
+}
+
 
 int main()
 {
@@ -101,7 +115,7 @@ int main()
     Enemy enemy(50, 3, 12);
     Gameplay game;
     game.disp_level(player, enemy);
-    game.disp_chest(player);
+    test_pop_chest();
     cout << "\nEnd of tests" << endl;
 
 }
