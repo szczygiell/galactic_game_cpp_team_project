@@ -36,4 +36,6 @@ class Item
             return true;
         }
 
+        // trzeba zrobić operator == dla itemu
+
 };

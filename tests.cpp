@@ -6,6 +6,7 @@
 #include "Chest.h"
 #include "Action.h"
 #include "Gameplay.h"
+#include "Boss.h"
 
 //TODO
 // TESTY DLA CHEST
@@ -120,11 +121,20 @@ void test_is_enemy_alive()
         cout << "Error in enemy is_alive"<< endl;
 }
 
-// void test_boss()
-// {
+// trzeba zrobić operator== dla klasy Item
+// dla tego testu przy okazji będzie trzeba oczywiście poprawić makefile
+// ja już nie mogę tego zrobić bo muszę iść
 
-// }
-
+/*
+void create_test_boss(int h, int wd, int ek, Item &si)
+{
+    Boss *szefo = new Boss(h, wd, ek, si);
+    if(szefo->get_ehealth() == h && szefo->get_ewd() == wd
+    && szefo->get_ekind() == ek && szefo->get_bitem_info() == si)
+        cout << "Create boss passed" << endl;
+    else cout<< "Error in create boss" << endl;
+}
+*/
 
 int main()
 {
