@@ -17,4 +17,5 @@ class Gameplay
 
         tuple<int, int, int, int> get_state_chest(Player& player);
         void disp_chest(Player& player); // jako drugi parametr będzie musiało być: ', Chest& chest'
+
 };
