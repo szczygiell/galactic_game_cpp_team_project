@@ -30,5 +30,5 @@ class Player : public Person
         int get_sh() {return this->shield;}
         void pick_up(const int& new_wd);
         void heal(const int &potion);
-        int attack_kind(Enemy enemy, int akind);
+        int attack_kind(Enemy& enemy, int akind);
 };

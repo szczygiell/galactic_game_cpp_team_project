@@ -152,14 +152,18 @@ int main()
     Player player(100, 100, 4, 1);
     Enemy enemy(50, 10, 1);
     Item * piwo = new Item("Piwo", 10, 1);
-    Boss boss = Boss(100, 20, 2, *piwo);
+    Boss boss = Boss(10, 20, 2, *piwo);
     Gameplay game;
     game.boss_battle(player, boss);
-    // test_pop_chest();
+    Chest chest = Chest();
+    chest.add_items();
+    game.disp_chest(player, chest);
+    //test_pop_chest();
+
     test_enemy_take_damage(7);
     test_is_enemy_alive();
-    
-    create_test_boss(10, 2, 4, *piwo);
+
+    //create_test_boss(10, 2, 4, *piwo);
     test_attack_kind();
     cout << "\nEnd of tests" << endl;
 
@@ -167,7 +171,8 @@ int main()
 
 
 //POPRAWIC MECHANIKE WALKI
-//NAPISAC METODE WALKI Z BOSEM
 //NAPISAC OPCJE WYCHODZENIA Z GRY
-//RODZAJE ATAKU DO PLAYERA
-//FUNKCJA OTWIERANIA SKRZYN
+//POPRAWIĆ NIESKOŃCZONĄ PĘTLE CHOOSE OPTION
+//MAIN Z GRĄ
+//FABUŁA
+//KLASA POZIOM(DO OMÓWIENIA)
