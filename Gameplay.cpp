@@ -157,7 +157,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
     while(cond)
     {
         cin >> opt;
-        if(opt[0] == 'Y' || opt[0] == 'y')
+        if(opt[0] == 'Y' || opt[0] == 'y') 
         {
             if(item.get_ikind() == 0)
             {
