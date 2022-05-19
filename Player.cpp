@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Player.h"
+#include "Enemy.h"
 
 void Player::set_mh(int mh)
 {
@@ -38,4 +39,11 @@ void Player::heal(const int &potion)
             const int &new_health = health + potion;
             set_health(new_health);
         }
+}
+
+int Player::attack_kind(Enemy enemy, int akind)
+{
+    if(akind == enemy.get_ekind())
+        return this->weapon_damage + 0.5 * this->weapon_damage;
+    return this->weapon_damage;
 }

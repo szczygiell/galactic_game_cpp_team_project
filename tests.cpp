@@ -126,7 +126,19 @@ void create_test_boss(int h, int wd, int ek, Item &si)
         cout << "Create boss passed" << endl;
     else cout<< "Error in create boss" << endl;
 }
-    
+
+void test_attack_kind()
+{
+    Enemy enemy = Enemy(20, 2, 1);
+    Player player = Player(10, 20, 6, 1);
+    int ak1 = 1;
+    int ak2 = 2;
+    if(player.attack_kind(enemy, ak1) == 9 && player.attack_kind(enemy, ak2) == 6)
+        cout<<"attack kind test passed"<<endl;
+    else
+        cout<<"Error in attack kind test"<<endl;
+}
+
 int main()
 {
     create_player(10, 20, 5, 5);
@@ -137,7 +149,7 @@ int main()
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
     test_chest();
-    Player player(100, 100, 3, 1);
+    Player player(100, 100, 4, 1);
     Enemy enemy(50, 10, 1);
     Gameplay game;
     game.battle(player, enemy);
@@ -146,6 +158,7 @@ int main()
     test_is_enemy_alive();
     Item * piwo = new Item("Piwo", 10, 1);
     create_test_boss(10, 2, 4, *piwo);
+    test_attack_kind();
     cout << "\nEnd of tests" << endl;
 
 }

@@ -41,7 +41,7 @@ class Enemy: public Person
             this->health += new_health;
         }
 
-        
+
 
         bool dodge()
         {
@@ -66,7 +66,7 @@ class Enemy: public Person
                 return "Twoja stara";
             if(ekind == 3)
                 return "Twój stary";
-            else    
+            else
                 return "nieznany gatunek";
         }
 

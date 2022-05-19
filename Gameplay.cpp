@@ -27,7 +27,7 @@ void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
     cout << "\n";
     cout << "\t\t\t\t\tCurrent stage: " << "\t round: "<< round << endl;;  //wpisujemy etap
     cout << "\tOptions:\n";
-    cout << "\t\t(1) Attack" << endl;
+    cout << "\t\t(1) Attack --> Attack kinds: (0)water (1)fire (2)air (3)earth" << endl;
     cout << "\t\t(2) Defend and regenerate" << endl;
     cout << "\n";
     cout << "\n";
@@ -85,19 +85,34 @@ void Gameplay::battle(Player &player, Enemy &enemy)
     {
         int option;
         disp_battle(player, enemy, round);
-        
+
         bool temp = true;
         while(temp)
         {
             cin >> option;
             if(option == 1)
             {
-                if(enemy.dodge() == false)
+                int option2;
+                bool temp2=true;
+                while(temp2)
                 {
-                    enemy.take_damage(player.get_wd());
+                    cout<<"Choose kind of attack"<<endl;
+                    cin >> option2;
+                    if(option2 == 0||option2 == 1||option2 == 2||option2 == 3)
+                    {
+                        if(enemy.dodge() == false)
+                        {
+                            enemy.take_damage(player.attack_kind(enemy, option2));
+                        }
+                        player.take_damage(enemy.deal_dmg());
+                        temp = false;
+                    }
+                    else
+                    {
+                        cout<<"Enter valid value"<<endl;
+                        continue;
+                    }
                 }
-                player.take_damage(enemy.deal_dmg());
-                temp = false;
             }
             else if(option == 2)
             {
