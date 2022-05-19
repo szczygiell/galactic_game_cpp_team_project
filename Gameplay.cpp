@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Gameplay.h"
 #include "Boss.h"
+#include <limits>
 
 using namespace std;
 
@@ -49,7 +50,6 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
         player.set_sh(player.get_sh() + bitem.get_ivalue());
 }
 
-
 void Gameplay::battle(Player &player, Enemy &enemy)
 {
     disp_border();
@@ -62,12 +62,17 @@ void Gameplay::battle(Player &player, Enemy &enemy)
     {
         int option;
         disp_battle(player, enemy, round);
-
         bool cond = true;
         while(cond)
         {
-            cout<<"choose option: "<<endl;
+            cout<<"Choose option: "<<endl;
             cin >> option;
+            // bool correct = false
+            // while()
+            // {
+            //     if(option)// nie nalezy do zbioru poprawnych odpowiedzi
+            //         // cin >> option
+            // }
             if(option == 1)
             {
                 int option2;
@@ -76,6 +81,12 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                 {
                     cout<<"Choose kind of attack"<<endl;
                     cin >> option2;
+                    while(!isdigit(option2))
+                    {
+                        cout << "Enter valid value" << endl;
+                        cin >> option2;
+                    }
+                    
                     if(option2 == 0||option2 == 1||option2 == 2||option2 == 3)
                     {
                         if(enemy.dodge() == false)
@@ -92,10 +103,8 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                     }
                     else
                     {
-                        cout<<"Enter valid value"<<endl;
-                        continue;
-
-                    }
+                        cout<<"Enter valid value"<<endl; 
+                    }           
                 }
             }
             else if(option == 2)
@@ -118,11 +127,12 @@ void Gameplay::battle(Player &player, Enemy &enemy)
             else
             {
                 cout << "Enter valid value" << endl;
-                continue;
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
         }
         round++;
-    }
+    }    
 
     if(!player.is_alive())
     {
@@ -132,7 +142,6 @@ void Gameplay::battle(Player &player, Enemy &enemy)
     {
         cout << "YOU WON...\n Congratulations!" << endl;
     }
-
 }
 
 void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr będzie musiało być: ', Chest& chest'
@@ -158,7 +167,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
             else if(item.get_ikind() == 1)
             {
                 player.pick_up(item.get_ivalue());
-                cout <<item.get_iname()<< " increased your damage by "<<item.get_ivalue()<<" points"<<endl;
+                cout<<item.get_iname()<< " increased your damage by "<<item.get_ivalue()<<" points"<<endl;
             }
             else
             {
@@ -173,8 +182,10 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
             cond = false;
         }
         else
+        {
             cin.fail();
             cout<<"Enter valid value"<<endl;
+        }
     }
     cout << "\n";
     //cout << "\t\t\t\t\tCurrent stage: " << endl;
