@@ -151,12 +151,14 @@ int main()
     test_chest();
     Player player(100, 100, 4, 1);
     Enemy enemy(50, 10, 1);
+    Item * piwo = new Item("Piwo", 10, 1);
+    Boss boss = Boss(100, 20, 2, *piwo);
     Gameplay game;
-    game.battle(player, enemy);
+    game.boss_battle(player, boss);
     // test_pop_chest();
     test_enemy_take_damage(7);
     test_is_enemy_alive();
-    Item * piwo = new Item("Piwo", 10, 1);
+    
     create_test_boss(10, 2, 4, *piwo);
     test_attack_kind();
     cout << "\nEnd of tests" << endl;

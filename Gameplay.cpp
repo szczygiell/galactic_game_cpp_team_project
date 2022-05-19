@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Gameplay.h"
+#include "Boss.h"
 
 using namespace std;
 
@@ -35,7 +36,7 @@ void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
     cout << "\tAttack points: " << get<0>(params) << endl; // player.atrybuty
     cout << "\tProtection points: " << get<1>(params) << endl;
     cout << "\tHealth: " << get<2>(params) << "/" << get<3>(params) << endl;
-    cout << "\n\n\t**Enemy**" << endl;
+    cout << "\n\n\t**Enemy: " << enemy.get_name() << endl;
     cout << "\tEnemy attack points: " << get<4>(params) << endl; // enemy.atrybuty
     cout << "\tEnemy health: " << get<5>(params) << endl;
     cout << "\n";
@@ -70,6 +71,20 @@ void Gameplay::disp_chest(Player& player) // jako drugi parametr będzie musiał
     cout << "\tHealth: " << get<2>(params) << "/" << get<3>(params) << endl;
     cout << "\n";
     disp_border();
+}
+
+void Gameplay::boss_battle(Player &player, Boss &boss)
+{
+    battle(player, boss);
+    Item bitem = boss.get_bitem_info();
+    cout << "You defeated the Boss\nIn return you get ";
+    bitem.print();
+    if(bitem.get_ikind() == 0)
+        player.heal(bitem.get_ivalue());
+    else if(bitem.get_ikind() == 1)
+        player.pick_up(bitem.get_ivalue());
+    else
+        player.set_sh(player.get_sh() + bitem.get_ivalue());
 }
 
 
