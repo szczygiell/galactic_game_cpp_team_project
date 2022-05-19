@@ -112,7 +112,7 @@ void test_is_enemy_alive()
 {
     Enemy *enemy = new Enemy(20, 2, 1);
     enemy->take_damage(21);
-    if(not enemy->is_alive())
+    if(!enemy->is_alive())
         cout << "enemy is_alive passed" << endl;
     else
         cout << "Error in enemy is_alive"<< endl;

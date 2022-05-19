@@ -86,15 +86,15 @@ void Gameplay::battle(Player &player, Enemy &enemy)
         int option;
         disp_battle(player, enemy, round);
 
-        bool temp = true;
-        while(temp)
+        bool cond = true;
+        while(cond)
         {
             cin >> option;
             if(option == 1)
             {
                 int option2;
-                bool temp2=true;
-                while(temp2)
+                bool cond2=true;
+                while(cond2)
                 {
                     cout<<"Choose kind of attack"<<endl;
                     cin >> option2;
@@ -105,12 +105,14 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                             enemy.take_damage(player.attack_kind(enemy, option2));
                         }
                         player.take_damage(enemy.deal_dmg());
-                        temp = false;
+                        cond2 = false;
+                        cond = false;
                     }
                     else
                     {
                         cout<<"Enter valid value"<<endl;
                         continue;
+
                     }
                 }
             }
@@ -123,7 +125,7 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                     player.heal(10);
                 else
                     player.take_damage(enemy.deal_dmg());
-                temp = false;
+                cond = false;
             }
             else
             {
