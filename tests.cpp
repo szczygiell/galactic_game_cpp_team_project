@@ -139,7 +139,7 @@ void test_attack_kind()
         cout<<"Error in attack kind test"<<endl;
 }
 
-int main()
+void prev_tests()
 {
     create_player(10, 20, 5, 5);
     heal_player(5);
@@ -149,6 +149,12 @@ int main()
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
     test_chest();
+}
+
+int main()
+{
+    cout << "\nTests start here:\n\n" << endl;
+    // prev_tests();
     Player player(100, 100, 4, 1);
     Enemy enemy(50, 10, 1);
     Item * piwo = new Item("Piwo", 10, 1);
@@ -158,10 +164,9 @@ int main()
     Chest chest = Chest();
     chest.add_items();
     game.disp_chest(player, chest);
-    //test_pop_chest();
 
-    test_enemy_take_damage(7);
-    test_is_enemy_alive();
+    // test_enemy_take_damage(7);
+    // test_is_enemy_alive();
 
     //create_test_boss(10, 2, 4, *piwo);
     test_attack_kind();
