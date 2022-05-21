@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Gameplay.h"
 #include "Boss.h"
+#include "Enemy.h"
 #include <limits>
-
 using namespace std;
 
 void disp_border()
@@ -63,7 +63,6 @@ void Gameplay::battle(Player &player, Enemy &enemy)
         bool cond = true;
         while(cond)
         {
-            cout << "??? cond1"<<endl;
             cout<<"choose option: "<<endl;
             cin >> option;
             while(cin.fail())
@@ -78,7 +77,6 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                 bool cond2=true;
                 while(cond2)
                 {
-                    cout << "??? cond2"<<endl;
                     cout<<"Choose kind of attack"<<endl;
                     cin >> option2;
                     while(cin.fail())
@@ -139,7 +137,7 @@ void Gameplay::battle(Player &player, Enemy &enemy)
 
     if(!player.is_alive())
     {
-        cout << "YOU DIED...\n" << endl;
+        cout << "YOU DIED..." << endl;
     }
     if(!enemy.is_alive())
     {
@@ -208,5 +206,14 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
     cout << "\tHealth: " << player.get_health() << "/" << player.get_mh() << endl;
     cout << "\n";
     disp_border();
+}
+
+Enemy generate_enemy(int& level, int& ekind)
+{
+    srand(time(0));
+    int ehealth = rand() % (10- level)*5;
+    int ewd = rand() % (10 - level);
+    return Enemy(ehealth, ewd, ekind);
+
 }
 

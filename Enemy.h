@@ -31,6 +31,8 @@ class Enemy: public Person
             eweapon_damage = wd;
             ekind = ek;
         }
+        Enemy()
+        {}
 
         int get_ehealth() {return this->health;};
         int get_ewd() {return this->eweapon_damage;};
@@ -58,8 +60,15 @@ class Enemy: public Person
 
         std::string get_name()
         {
+            srand(time(0));
+            int temp = rand() % 3;
             if(ekind == 0)
-                return "Ognisty żywiołak";
+                if(temp = 0)
+                    return "Ognisty żywiołak";
+                if(temp = 1)
+                    return "Ognisty pies";
+                if(temp = 2)
+                    return "Ognisty smok";
             if(ekind == 1)
                 return "Baba wodna";
             if(ekind == 2)
@@ -77,3 +86,12 @@ class Enemy: public Person
             return eweapon_damage - dmg;
         }
 };
+
+// Enemy generate_enemy(int& level, int& ekind)
+// {
+    // srand(time(0));
+    // int ehealth = rand() % (10- level)*5;
+    // int ewd = rand() % (10 - level);
+    // return Enemy(ehealth, ewd, ekind);
+//
+// }
