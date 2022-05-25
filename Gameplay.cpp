@@ -14,18 +14,18 @@ void disp_border()
 void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
 {
     disp_border();
-    cout << "\t\t\t\t\tCurrent stage: " << "\t round: "<< round << endl;  //wpisujemy etap
+    cout << "\t\t\t\t\tCurrent stage: " << "\t round: "<< round << endl;
     cout << "\tOptions:\n";
-    cout << "\t\t(1) Attack --> Attack kinds: (0)water (1)fire (2)air (3)earth" << endl;
+    cout << "\t\t(1) Attack --> Draw special attack from 0 to 3" << endl;
     cout << "\t\t(2) Defend and regenerate" << endl;
     cout << "\n";
     cout << "\n";
     cout << "\t**Player (You)**" << endl;
-    cout << "\tAttack points: " << player.get_wd() << endl; // player.atrybuty
+    cout << "\tAttack points: " << player.get_wd() << endl;
     cout << "\tProtection points: " << player.get_sh() << endl;
     cout << "\tHealth: " << player.get_h() << "/" << player.get_mh() << endl;
-    cout << "\n\n\t**Enemy: " << enemy.get_name() << endl;
-    cout << "\tEnemy attack points: " << enemy.get_ewd() << endl; // enemy.atrybuty
+    cout << "\n\n\t**Enemy: " << enemy.get_name() << "**" << endl;
+    cout << "\tEnemy attack points: " << enemy.get_ewd() << endl;
     cout << "\tEnemy health: " << enemy.get_ehealth() << endl;
     disp_border();
 }
@@ -39,7 +39,7 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
         cout << "You defeated the Boss\nIn return you get ";
         bitem.print();
     }
-    cout << "koniec walki" << endl;
+    cout << "You were defeated by the boss" << endl;
     if(bitem.get_ikind() == 0)
         player.heal(bitem.get_ivalue());
     else if(bitem.get_ikind() == 1)
@@ -63,7 +63,7 @@ void Gameplay::battle(Player &player, Enemy &enemy)
         bool cond = true;
         while(cond)
         {
-            cout<<"choose option: "<<endl;
+            cout<<"Choose option: "<<endl;
             cin >> option;
             while(cin.fail())
             {
@@ -110,7 +110,6 @@ void Gameplay::battle(Player &player, Enemy &enemy)
             }
             else if(option == 2)
             {
-                //obrona i regeneracja
                 srand(time(0));
                 int chance = rand() % (6 - player.get_sh());
                 if(chance == 0)
@@ -137,15 +136,15 @@ void Gameplay::battle(Player &player, Enemy &enemy)
 
     if(!player.is_alive())
     {
-        cout << "YOU DIED..." << endl;
+        cout << "YOU DIED...\n\n" << endl;
     }
     if(!enemy.is_alive())
     {
-        cout << "YOU WON...\n Congratulations!" << endl;
+        cout << "YOU WON...\n Congratulations!\n\n" << endl;
     }
 }
 
-void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr będzie musiało być: ', Chest& chest'
+void Gameplay::disp_chest(Player& player, Chest& chest)
 {
     disp_border();
     string opt;
@@ -182,7 +181,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
         }
         else if (opt[0] == 'N' || opt[0] == 'n')
         {
-            cout<<"You left item"<<endl; //?
+            cout<<"You left item"<<endl;
             cond = false;
         }
         else
@@ -192,27 +191,56 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
         }
     }
     cout << "\n";
-    //cout << "\t\t\t\t\tCurrent stage: " << endl;
-
-    // cout << "\t\t(1) " << "przykladowa zawartosc skrzyni (laser 'A0' [+1 ap])" << endl; // elementy skrzyni po kolei
-    // cout << "\t\t(2) " << " przydaloby się zrobic operator<< "<< endl; // zależnie jak stworzymy ostatecznie skrzynie
-    // cout << "\t\t(3) " << "mozna by wtedy wyswietlac w miare latwo " <<endl; // to tutaj będzie musiało się to jakoś utworzyć
-    // cout << "\n";
     disp_border();
     cout << "Current atributes:\n"<<endl;
     cout << "\t**Player (You)**" << endl;
-    cout << "\tAttack points: " << player.get_wd() << endl; // player.atrybuty
+    cout << "\tAttack points: " << player.get_wd() << endl;
     cout << "\tProtection points: " << player.get_sh() << endl;
     cout << "\tHealth: " << player.get_health() << "/" << player.get_mh() << endl;
     cout << "\n";
     disp_border();
 }
 
-Enemy generate_enemy(int const& level, int const& ek)
+std::string draw_rand_name(int const& ek)
 {
     srand(time(0));
-    int ehealth = (rand() % (5+ level))*5;
-    int ewd = rand() % (5 + level);
-    return Enemy(ehealth, ewd, ek);
+    int temp = rand() % 3;
+    if(ek == 0)
+        if(temp = 0)
+            return "Ognisty żywiołak";
+        if(temp = 1)
+            return "Ognisty pies";
+        if(temp = 2)
+            return "Ognisty smok";
+    if(ek == 1)
+        return "Baba wodna";
+    if(ek == 2)
+        return "Twoja stara";
+    if(ek == 3)
+        return "Twój stary";
+    else
+        return "nieznany gatunek";
+}
+
+Enemy generate_enemy(int const& ek)
+{
+    srand(time(0));
+    int ehealth = (rand() % (5+ ek))*5;
+    int ewd = rand() % (5 + ek);
+    return Enemy(draw_rand_name(ek), ehealth, ewd, ek);
+}
+
+
+void Gameplay::draw_battle(Player &player, int const& ek)
+{
+    
+    Enemy rand_enemy = generate_enemy(ek);
+    srand(time(0));
+    if (rand() % 5 == 0)
+    {
+        cout << "You were unexpectedly attacted by unknown enemy" << endl;
+        system("pause");
+        battle(player, rand_enemy);
+    }
 }
 

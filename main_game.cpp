@@ -3,26 +3,61 @@
 #include "Player.h"
 #include "Enemy.h"
 
+/*przebudowalem gre w taki sposob ze enemy w konstruktorze ma imie
+randomowo losowana nazwa enemy bedzie dla funkcji ktora bedzie losowala
+czy w czasie gry ma odbyc sie bitwa z jakimis wrogrami, ktorych
+imiona zostana wylosowane z funkcji draw_rand_name
+
+zmienilem tez rodzaje wroga w taki sposob ze jeden rodzaj jest na planete
+to zalatwia juz poziom trudnosci w jakis sposob biorac pod uwage
+ze jedna planeta to jeden lvl wyzej
+*/
+
+//DODAC DELAYA KTORY DZIALA I DLA UNIXA I DLA WINDOWSA
+//POPRAWIC SHIELDA BO GOWNO DAJE I ZABIERA HP
+//ZMODYFIKOWAC ITEMY W SKRZYNCE TAK ABY TEZ ZABIERALY HP , WD itd...
+
 using namespace std;
-
-
-
-
-
 
 
 void plot()
 {
     Gameplay game;
+    Chest chest = Chest();
+    chest.add_items();
     Player player(100, 100, 10, 1);
-    cout << "Rok 2154. cywilizacja ziemska jest na skraju upadku. zostales wyslany\
-    na specjalna misje odnalezienia mitycznego surowca ktory rozwiaze problem energetyczny\
-    na Ziemii. znajdujesz sie na planecie pipr. to bardzo bardzo niebezpieczna planeta.\
-    twoim zadaniem jest pokonanie cywilizacji strzezacej tego surowca. ";
-    cout << "twoje ladowanie odnotowuja straznicy przestrzeni powietrznej";
-    Enemy air_guard = generate_enemy(1, 3);
+    cout << 
+    "Year 2154. Human civiliation is at edge of collapse.\n\
+    You have been sent on a special mission to locate the mythical resource\n\
+    that will resolve energetic crisis on Earth.\n\
+    You begin your journey on highly dangerous planet, PIPR-2.\n\
+    Your task is to defeat the enemies guarding the mystery of the resource, which\n\
+    we will call ECTS-30\n\n\n\n";
+    system("pause");
+    cout << "Your landing is spotted by air guards\n";
+    system("pause");
+    Enemy air_guard = Enemy("Air guards", 30, 5, 0);
     game.battle(player, air_guard);
+    game.draw_battle(player, 0);
+    system("pause");
+    cout << "You find unidentified package... Could it be the ECTS-30???\n\n";
+    game.disp_chest(player, chest);
+    system("pause");
+    cout << "\nYou have been heard by patrol drones!\n\n";
+    system("pause");
+    Enemy drones = Enemy("Patrol drones", 50, 10, 0);
+    game.battle(player, drones);
+    system("pause");
+    cout << "You reached secret research facility...\n";
+    cout << "The classified location of ECTS-30 is guarded by highly advanced robot\n\
+    which you'll have to defeat. But it won't be so easy...\n\n";
+    system("pause");
+    Boss robot = Boss("Guarding robot", 80, 30, 0, *(new Item("Blade", 10, 1)));
+    game.boss_battle(player, robot);
 
+
+    if (!player.is_alive())
+        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end.";
     
 }
 
@@ -44,7 +79,7 @@ int main()
         {
             cout<<"See you later"<<endl;
             cond = false;
-            //exit
+            exit(0);
         }
         else
         {

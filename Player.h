@@ -1,8 +1,8 @@
 #include <iostream>
-#pragma once
 #include "Person.h"
 #include "Enemy.h"
 
+#pragma once
 using namespace std;
 
 

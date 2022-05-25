@@ -17,7 +17,7 @@ class Boss: public Enemy
 
     public:
 
-        Boss(int h, const int wd, int ek, Item &si):Enemy(h, wd, ek)
+        Boss(std::string n, int h, const int wd, int ek, Item &si):Enemy(n, h, wd, ek)
         {
             special_item = si;
         }
