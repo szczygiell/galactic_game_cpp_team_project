@@ -4,7 +4,6 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "Chest.h"
-#include "Action.h"
 #include "Gameplay.h"
 #include "Boss.h"
 
@@ -141,20 +140,20 @@ void test_attack_kind()
 
 int main()
 {
-    // create_player(10, 20, 5, 5);
-    // heal_player(5);
-    // max_heal_player(15);
-    // pick_up_player(5);
-    // create_enemy(15, 20, 3);
-    // create_item("Laser", 10, 1);
-    // item_print_test("Laser", 10, 1);
-    // test_chest();
-    Player player(100, 100, 4, 1);
-    Enemy enemy(50, 10, 1);
-    Item * piwo = new Item("Piwo", 10, 1);
-    Boss boss = Boss(10, 20, 2, *piwo);
-    Gameplay game;
-    game.boss_battle(player, boss);
+    create_player(10, 20, 5, 5);
+    heal_player(5);
+    max_heal_player(15);
+    pick_up_player(5);
+    create_enemy(15, 20, 3);
+    create_item("Laser", 10, 1);
+    item_print_test("Laser", 10, 1);
+    test_chest();
+    // Player player(100, 100, 4, 1);
+    // Enemy enemy(50, 10, 1);
+    // Item * piwo = new Item("Piwo", 10, 1);
+    // Boss boss = Boss(10, 20, 2, *piwo);
+    // Gameplay game;
+    // game.boss_battle(player, boss);
     // Chest chest = Chest();
     // chest.add_items();
     // game.disp_chest(player, chest);

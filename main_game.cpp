@@ -11,13 +11,19 @@ using namespace std;
 
 
 
-
-
-
-
 void plot()
 {
-    //cala fabula
+    Gameplay game;
+    Player player(100, 100, 10, 1);
+    cout << "Rok 2154. cywilizacja ziemska jest na skraju upadku. zostales wyslany\
+    na specjalna misje odnalezienia mitycznego surowca ktory rozwiaze problem energetyczny\
+    na Ziemii. znajdujesz sie na planecie pipr. to bardzo bardzo niebezpieczna planeta.\
+    twoim zadaniem jest pokonanie cywilizacji strzezacej tego surowca. ";
+    cout << "twoje ladowanie odnotowuja straznicy przestrzeni powietrznej";
+    Enemy air_guard = generate_enemy(1, 3);
+    game.battle(player, air_guard);
+
+    
 }
 
 int main()
@@ -38,6 +44,7 @@ int main()
         {
             cout<<"See you later"<<endl;
             cond = false;
+            //exit
         }
         else
         {
@@ -45,4 +52,5 @@ int main()
             cout<<"Enter valid value"<<endl;
         }
     }
+    plot();
 }

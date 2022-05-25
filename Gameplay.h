@@ -18,3 +18,6 @@ class Gameplay
         void boss_battle(Player &player, Boss &boss);
         void disp_chest(Player& player, Chest& chest); // jako drugi parametr będzie musiało być: ', Chest& chest'
 };
+
+
+Enemy generate_enemy(int const& level, int const& ek);

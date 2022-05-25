@@ -86,12 +86,3 @@ class Enemy: public Person
             return eweapon_damage - dmg;
         }
 };
-
-// Enemy generate_enemy(int& level, int& ekind)
-// {
-    // srand(time(0));
-    // int ehealth = rand() % (10- level)*5;
-    // int ewd = rand() % (10 - level);
-    // return Enemy(ehealth, ewd, ekind);
-//
-// }

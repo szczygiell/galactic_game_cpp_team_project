@@ -208,12 +208,11 @@ void Gameplay::disp_chest(Player& player, Chest& chest) // jako drugi parametr b
     disp_border();
 }
 
-Enemy generate_enemy(int& level, int& ekind)
+Enemy generate_enemy(int const& level, int const& ek)
 {
     srand(time(0));
-    int ehealth = rand() % (10- level)*5;
-    int ewd = rand() % (10 - level);
-    return Enemy(ehealth, ewd, ekind);
-
+    int ehealth = (rand() % (5+ level))*5;
+    int ewd = rand() % (5 + level);
+    return Enemy(ehealth, ewd, ek);
 }
 
