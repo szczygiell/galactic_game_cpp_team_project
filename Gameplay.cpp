@@ -39,7 +39,8 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
         cout << "You defeated the Boss\nIn return you get ";
         bitem.print();
     }
-    cout << "You were defeated by the boss" << endl;
+    else
+        cout << "You were defeated by the boss" << endl;
     if(bitem.get_ikind() == 0)
         player.heal(bitem.get_ivalue());
     else if(bitem.get_ikind() == 1)
@@ -114,10 +115,10 @@ void Gameplay::battle(Player &player, Enemy &enemy)
             else if(option == 2)
             {
                 srand(time(0));
-                int chance = rand() % (6 - player.get_sh());
-                if(chance == 0)
+                int chance = rand() % (100 + player.get_sh());
+                if(chance > 60)
                 {
-                    player.heal(10);
+                    player.heal(50);
                     cout<<"You healed yourself"<<endl;
                 }
                 else
@@ -210,17 +211,32 @@ std::string draw_rand_name(int const& ek)
     int temp = rand() % 3;
     if(ek == 0)
         if(temp = 0)
-            return "Ognisty żywiołak";
+            return "Pythonian guardian";
         if(temp = 1)
-            return "Ognisty pies";
+            return "Overflow beast";
         if(temp = 2)
-            return "Ognisty smok";
+            return "";
     if(ek == 1)
-        return "Baba wodna";
+        if(temp = 0)
+            return "Integral guards";
+        if(temp = 1)
+            return "Fouriers nemezis";
+        if(temp = 2)
+            return "Taylor The Humanoid";
     if(ek == 2)
-        return "Twoja stara";
+        if(temp = 0)
+            return "Electric eel";
+        if(temp = 1)
+            return "Evil Shipbuilder";
+        if(temp = 2)
+            return "";
     if(ek == 3)
-        return "Twój stary";
+        if(temp = 0)
+            return "Diabolic Segmentation fault";
+        if(temp = 1)
+            return "Memorius Referencus";
+        if(temp = 2)
+            return "";
     else
         return "nieznany gatunek";
 }
