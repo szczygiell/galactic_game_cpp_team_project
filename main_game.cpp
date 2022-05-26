@@ -26,39 +26,35 @@ void plot()
     Chest chest = Chest();
     chest.add_items();
     Player player(100, 100, 10, 1);
-    cout << 
-    "Year 2154. Human civiliation is at edge of collapse.\n\
+    cout <<
+    "\nYear 2154. Human civiliation is at edge of collapse.\n\
     You have been sent on a special mission to locate the mythical resource\n\
     that will resolve energetic crisis on Earth.\n\
     You begin your journey on highly dangerous planet, PIPR-2.\n\
     Your task is to defeat the enemies guarding the mystery of the resource, which\n\
     we will call ECTS-30\n\n\n\n";
-    system("pause");
-    cout << "Your landing is spotted by air guards\n";
-    system("pause");
+    cin.get();
+    cout << "Your landing is spotted by air guards\n"<< endl;
     Enemy air_guard = Enemy("Air guards", 30, 5, 0);
     game.battle(player, air_guard);
     game.draw_battle(player, 0);
-    system("pause");
     cout << "You find unidentified package... Could it be the ECTS-30???\n\n";
     game.disp_chest(player, chest);
-    system("pause");
     cout << "\nYou have been heard by patrol drones!\n\n";
-    system("pause");
     Enemy drones = Enemy("Patrol drones", 50, 10, 0);
+    cin.get();
     game.battle(player, drones);
-    system("pause");
     cout << "You reached secret research facility...\n";
     cout << "The classified location of ECTS-30 is guarded by highly advanced robot\n\
     which you'll have to defeat. But it won't be so easy...\n\n";
-    system("pause");
+    cin.get();
     Boss robot = Boss("Guarding robot", 80, 30, 0, *(new Item("Blade", 10, 1)));
     game.boss_battle(player, robot);
 
 
     if (!player.is_alive())
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end.";
-    
+        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+
 }
 
 int main()

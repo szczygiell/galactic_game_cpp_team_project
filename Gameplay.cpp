@@ -5,16 +5,21 @@
 #include <limits>
 using namespace std;
 
+#include<unistd.h>
+const unsigned int microsecond = 500000;
+// nie wiem czy to dobry pomysł z globalną zmienną ale na pewno jest to wygodne
+
+
 void disp_border()
 {
-    string hash(100, '#');
+    string hash(70, '#');
     cout << '\n' << hash << '\n'<< std::endl;
 }
 
 void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
 {
     disp_border();
-    cout << "\t\t\t\t\tCurrent stage: " << "\t round: "<< round << endl;
+    cout << "\t\t\tCurrent stage: " << "\t round: "<< round << endl;
     cout << "\tOptions:\n";
     cout << "\t\t(1) Attack --> Draw special attack from 0 to 3" << endl;
     cout << "\t\t(2) Defend and regenerate" << endl;
@@ -51,6 +56,8 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
 
 void Gameplay::battle(Player &player, Enemy &enemy)
 {
+    cout << "Press any key to continue...\n" << endl;
+    cin.get();
     disp_border();
     cout << "!!!WATCH OUT FOR ENEMY!!!" << endl;
     cout << "You have been attacked by " << enemy.get_name() << endl;
@@ -60,6 +67,7 @@ void Gameplay::battle(Player &player, Enemy &enemy)
     while(player.is_alive() && enemy.is_alive())
     {
         int option;
+        usleep(2 * microsecond);
         disp_battle(player, enemy, round);
         bool cond = true;
         while(cond)
@@ -69,7 +77,8 @@ void Gameplay::battle(Player &player, Enemy &enemy)
             while(cin.fail())
             {
                 cin.clear(); cin.ignore(512, '\n');
-                cout << "Invalid Value. Type again... [hint: Input should be a number]\n";
+                cout << "Invalid Value. Type again... [hint: Input should be a number]\n"
+                << "if you want to exit press '^C' "<< endl;
                 cin >> option;
             }
             if(option == 1)
@@ -88,17 +97,20 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                     }
                     if(option2 == 0||option2 == 1||option2 == 2||option2 == 3)
                     {
+                        usleep(3 * microsecond);
                         if(enemy.dodge() == false)
                         {
                             enemy.take_damage(player.attack_kind(enemy, option2));
-                            cout<<"You hit enemy for "<<player.attack_kind(enemy, option2)<<endl;
+
+                            cout<<"\nYou hit enemy for "<<player.attack_kind(enemy, option2)<<endl;
                         }
                         else
-                            cout<<"Enemy dodged your attack "<<endl;
+                            cout<<"\nEnemy dodged your attack "<<endl;
                         if(enemy.is_alive())
                         {
                             player.take_damage(enemy.deal_dmg());
-                            cout<<"Enemy hit you for "<<enemy.deal_dmg()<<endl;
+
+                            cout<<"\nEnemy hit you for "<<enemy.deal_dmg()<<endl;
                         }
                         cond2 = false;
                         cond = false;
@@ -114,16 +126,19 @@ void Gameplay::battle(Player &player, Enemy &enemy)
             }
             else if(option == 2)
             {
+                usleep(3 * microsecond);
                 srand(time(0));
                 int chance = rand() % (100 + player.get_sh());
                 if(chance > 60)
                 {
                     player.heal(50);
+
                     cout<<"You healed yourself"<<endl;
                 }
                 else
                 {
                     player.take_damage(enemy.deal_dmg());
+
                     cout<<"Enemy hit you for "<<enemy.deal_dmg()<<endl;
                 }
                 cond = false;
@@ -140,16 +155,19 @@ void Gameplay::battle(Player &player, Enemy &enemy)
 
     if(!player.is_alive())
     {
-        cout << "YOU DIED...\n\n" << endl;
+        usleep(3 * microsecond);
+        cout << "\nYOU DIED...\n\n" << endl;
     }
     if(!enemy.is_alive())
     {
-        cout << "YOU WON...\n Congratulations!\n\n" << endl;
+        usleep(3 * microsecond);
+        cout << "\nYOU WON...\n Congratulations!\n\n" << endl;
     }
 }
 
 void Gameplay::disp_chest(Player& player, Chest& chest)
 {
+    usleep(3 * microsecond);
     disp_border();
     string opt;
     Item item = chest.pop_item();
@@ -163,9 +181,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
         cin >> opt;
         if(opt[0] == 'Y' || opt[0] == 'y')
         {
-            // jest jakiś mały problem ponieważ nawet jesli pokonamy przeciwnika to po
-            // podniesieniu itemku (wszystkie wejscia do konsoli poprawne) i po  wyswietleniu
-            // np 'item dodal ci tyle hp' to i tak wyswietla sie Enter calid value
+            usleep(3 * microsecond);
             if(item.get_ikind() == 0)
             {
                 player.heal(item.get_ivalue());
@@ -185,6 +201,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
         }
         else if (opt[0] == 'N' || opt[0] == 'n')
         {
+            usleep(3 * microsecond);
             cout<<"You left item"<<endl;
             cond = false;
         }
@@ -194,6 +211,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
             cout<<"Enter valid value"<<endl;
         }
     }
+    usleep(3 * microsecond);
     cout << "\n";
     disp_border();
     cout << "Current atributes:\n"<<endl;
@@ -238,27 +256,37 @@ std::string draw_rand_name(int const& ek)
         if(temp = 2)
             return "";
     else
-        return "nieznany gatunek";
+        return "undefined kind of creature";
 }
 
 Enemy generate_enemy(int const& ek)
 {
+    // problemem z tym że ta walka od razu się kończy jest to że z jakiegoś
+    // przypisuje mu 0 zdrowia
+    // jeśli usunie się tego ifa z funkcji draw_battle to jest git
+    //  trzeba to ogarnąć
+
     srand(time(0));
     int ehealth = (rand() % (5+ ek))*5;
     int ewd = rand() % (5 + ek);
-    return Enemy(draw_rand_name(ek), ehealth, ewd, ek);
+
+    Enemy gienek = Enemy(draw_rand_name(ek), ehealth, ewd, ek);
+
+    // cout << "\n\n"<< gienek.get_name() << '\n' << gienek.get_health()
+    // << "\t=\t" << gienek.get_ehealth() << '\n' << gienek.get_ewd() << "\n\n" << endl;
+
+    return gienek;
 }
 
 
 void Gameplay::draw_battle(Player &player, int const& ek)
 {
-
-    Enemy rand_enemy = generate_enemy(ek);
+    cout << "1 - weszło do funckji" << endl;
     srand(time(0));
     if (rand() % 5 == 0)
     {
-        cout << "You were unexpectedly attacted by unknown enemy" << endl;
-        system("pause");
+        Enemy rand_enemy = generate_enemy(ek);
+        cout << "You were unexpectedly attacted by an unknown enemy" << endl;
         battle(player, rand_enemy);
     }
 }
