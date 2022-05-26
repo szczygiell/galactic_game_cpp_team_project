@@ -4,7 +4,6 @@
 #include "Enemy.h"
 #include "Item.h"
 #include "Chest.h"
-#include "Action.h"
 #include "Gameplay.h"
 #include "Boss.h"
 
@@ -24,7 +23,7 @@ void create_player(int mh, int wd, int sh, int h)
 
 void create_enemy(int h, int wd, int ek)
 {
-    Enemy *enemy = new Enemy(h, wd, ek);
+    Enemy *enemy = new Enemy("Wrog", h, wd, ek);
     if(enemy->get_ehealth() == h &&
         enemy->get_ewd() == wd && enemy->get_ekind() == ek)
         cout << "Create enemy passed" << endl;
@@ -100,7 +99,7 @@ void test_pop_chest()
 
 void test_enemy_take_damage(const int& dmg)
 {
-    Enemy *enemy = new Enemy(20, 2, 1);
+    Enemy *enemy = new Enemy("Wrog", 20, 2, 1);
     enemy->take_damage(dmg);
     if(enemy->get_ehealth() == (20-dmg))
         cout << "enemy take_damage passed" << endl;
@@ -110,7 +109,7 @@ void test_enemy_take_damage(const int& dmg)
 
 void test_is_enemy_alive()
 {
-    Enemy *enemy = new Enemy(20, 2, 1);
+    Enemy *enemy = new Enemy("Wrog", 20, 2, 1);
     enemy->take_damage(21);
     if(!enemy->is_alive())
         cout << "enemy is_alive passed" << endl;
@@ -120,7 +119,7 @@ void test_is_enemy_alive()
 
 void create_test_boss(int h, int wd, int ek, Item &si)
 {
-    Boss szefo = Boss(h, wd, ek, si);
+    Boss szefo = Boss("Boss", h, wd, ek, si);
     if(szefo.get_ehealth() == h && szefo.get_ewd() == wd
     && szefo.get_ekind() == ek && szefo.get_bitem_info() == si)
         cout << "Create boss passed" << endl;
@@ -129,7 +128,7 @@ void create_test_boss(int h, int wd, int ek, Item &si)
 
 void test_attack_kind()
 {
-    Enemy enemy = Enemy(20, 2, 1);
+    Enemy enemy = Enemy("Wrog", 20, 2, 1);
     Player player = Player(10, 20, 6, 1);
     int ak1 = 1;
     int ak2 = 2;
@@ -139,7 +138,7 @@ void test_attack_kind()
         cout<<"Error in attack kind test"<<endl;
 }
 
-void prev_tests()
+int main()
 {
     create_player(10, 20, 5, 5);
     heal_player(5);
@@ -149,24 +148,19 @@ void prev_tests()
     create_item("Laser", 10, 1);
     item_print_test("Laser", 10, 1);
     test_chest();
-}
+    // Player player(100, 100, 4, 1);
+    // Enemy enemy(50, 10, 1);
+    // Item * piwo = new Item("Piwo", 10, 1);
+    // Boss boss = Boss(10, 20, 2, *piwo);
+    // Gameplay game;
+    // game.boss_battle(player, boss);
+    // Chest chest = Chest();
+    // chest.add_items();
+    // game.disp_chest(player, chest);
+    //test_pop_chest();
 
-int main()
-{
-    cout << "\nTests start here:\n\n" << endl;
-    // prev_tests();
-    Player player(100, 100, 4, 1);
-    Enemy enemy(50, 10, 1);
-    Item * piwo = new Item("Piwo", 10, 1);
-    Boss boss = Boss(10, 20, 2, *piwo);
-    Gameplay game;
-    game.boss_battle(player, boss);
-    Chest chest = Chest();
-    chest.add_items();
-    game.disp_chest(player, chest);
-
-    // test_enemy_take_damage(7);
-    // test_is_enemy_alive();
+    test_enemy_take_damage(7);
+    test_is_enemy_alive();
 
     //create_test_boss(10, 2, 4, *piwo);
     test_attack_kind();

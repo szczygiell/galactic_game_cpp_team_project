@@ -18,17 +18,6 @@ void Chest::add_items()
     items[9] = Item("potion 3", 15, 0);
 }
 
-// tuple<Item, Item, Item> Chest::generate_chest()
-// {
-//     auto content = make_tuple(nullptr, nullptr, nullptr);
-//     for(int i=0; i<3; i++)
-//     {
-//         int idx = rand() % 10;
-//         get<i>(&items[idx])
-
-//     }
-// }
-
 Item Chest::pop_item()
 {
     int num = get_num();

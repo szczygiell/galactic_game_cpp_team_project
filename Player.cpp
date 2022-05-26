@@ -32,11 +32,11 @@ void Player::pick_up(const int& new_wd)
 }
 void Player::heal(const int &potion)
 {
-    if (health + potion >= max_health)
+    if (get_health() + potion >= max_health)
         set_health(max_health);
     else
         {
-            const int &new_health = health + potion;
+            const int &new_health = get_health() + potion;
             set_health(new_health);
         }
 }
