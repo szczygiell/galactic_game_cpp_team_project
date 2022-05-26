@@ -63,7 +63,6 @@ void Gameplay::battle(Player &player, Enemy &enemy)
         bool cond = true;
         while(cond)
         {
-            cout << "??? cond1"<<endl;
             cout<<"choose option: "<<endl;
             cin >> option;
             while(cin.fail())
@@ -78,7 +77,6 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                 bool cond2=true;
                 while(cond2)
                 {
-                    cout << "??? cond2"<<endl;
                     cout<<"Choose kind of attack"<<endl;
                     cin >> option2;
                     while(cin.fail())
@@ -96,8 +94,11 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                         }
                         else
                             cout<<"Enemy dodged your attack "<<endl;
-                        player.take_damage(enemy.deal_dmg());
-                        cout<<"Enemy hit you for "<<enemy.deal_dmg()<<endl;
+                        if(enemy.is_alive())
+                        {
+                            player.take_damage(enemy.deal_dmg());
+                            cout<<"Enemy hit you for "<<enemy.deal_dmg()<<endl;
+                        }
                         cond2 = false;
                         cond = false;
                     }
