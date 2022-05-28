@@ -2,14 +2,7 @@
 #include "Player.h"
 #include "Enemy.h"
 
-void Player::set_mh(int mh)
-{
-    if (mh < 0)
-    {
-        throw out_of_range("Incorrect max health");
-    }
-    Player::max_health = mh;
-}
+
 void Player::set_wd(int wd)
 {
     if (wd < 0)

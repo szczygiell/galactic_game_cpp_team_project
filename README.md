@@ -1,92 +1,246 @@
 # Intergalaktyczna gra turowa
+--------------------------------
+
+# Krótki opis
+
+Intergalaktyczna gra turowa to gra polegająca na pokonaniu wszystkich przeciwników i odnalezieniu przedmiotu, którego poszukiwanie zlecono na początku fabuły rozgrywki. Interakcja z użytkownikiem przebiega w terminalu, a sam użytkownik do dyspozycji ma jedynie klawiaturę numeryczną. Jego zadaniem jest wybieranie odpowiednich opcji by skutecznie przejść grę do końca, nie będąc zabitym przez żadnego wroga.
+
+Fabuła gry, podobnie jak wszystkie komendy, napisana jest po angielsku, ze względu na dobry nawyk programistyczny.
+
+# Konstrukcja programu
+
+Program został zrealizowany przy pomocy programowania obiektowego (OOP). Podsatową klasą jest **Person**, która jest klasą bazową, po której dziedziczą:
+
+
+- **Player**, który tworzy obiekt gracza, kontrolowanego przez użytkownika
+- **Enemy**, który tworzy obiekty wroga, atakujące gracza
+- **Boss**, który dodatkowo dziedziczy po klasie **Enemy** a tworzy obiekt bossa, którego trzeba pokonać pod koniec każdego poziomu.
+
+## **Person**
+
+Klasa **Person** przechowuje jedynie atrybut odpowiadający za punkty zdrowia, który można pozyskać lub ustawić metodami publicznymi.
+
+    class Person
+    {
+        protected:
+            const int health;
+    };
+
+
+## **Player**
+
+
+Klasa **Player** dodatkowo ma atrybuty:
+
+        int max_health;
+        int weapon_damage;
+        int shield;
+
+które nadają graczowi kolejno maksymalną ilość punktów życia (która jest niezmienialna), punkty ataku oraz punkty obrony.
+Punkty ataku odpowiadają za ilość punktów życia zabranych przeciwnikowi, a punkty obrony za ilość punktów życia nadanych graczowi, kiedy
+użytkownik postanowi użyć metody `heal`.
+Poza getterami i setterami, klasa player ma również wcześniej wspomnianą metodę `heal`, która polega na podniesieniu jego punktów życia
+(z upewnieniem się, że nie przekroczy ona wartości max_health) oraz `attack_kind`, która zostanie omówiona przy klasie **Gameplay**.
+
+## **Enemy**
+
+    class Enemy: public Person
+    {
+        protected:
+            std::string name;
+            int eweapon_damage;
+            int ekind;
+            //which value represents the planet:
+            //0: PIPR-2
+            //1: ALIN-ANA
+            //2: POEL-4.5P
+            //3: PROI-25
+    };
+
+Klasa **Enemy** poza atrybutem otrzymanym z klasy **Person**, posiada atrybut nazwy, punktów ataku oraz rodzaju. W grze rodzaj odpowiada aktualnemu poziomowi gry, które nazwy swoje mają od planet, na których wg fabuły w danej chwili znaduje się gracz. Rodzaj wroga wykorzystywany jest potem w wielu funkcjach i metodach klasy **Gameplay**.
+
+Klasa oczywiście posiada gettery i settery.
+
+Dodatkowo, klasa ma metodę *dodge()*, zwracającą wartość logiczną oraz *deal_dmg()* zwracającą liczbę całkowitą.
+
+    bool dodge()
+    {
+        srand(time(0));
+        int chance = rand() % 10;
+        if(chance == 1)
+            return true;
+        return false;
+    }
+
+Metoda *dodge()* losuje, z 10% szansą, czy wróg może uniknąc atak gracza.
+
+    int deal_dmg()
+    {
+        srand(time(0));
+        int dmg = rand() % 11;
+        return abs(eweapon_damage - dmg);
+    }
+
+Metoda *deal_dmg()* losuje z jaką ilością punktów ataku wróg zaatakuje przeciwnika.
 
 
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Dodatkowo napisane zostały klasy mające inne role:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- **Item**, który tworzy obiekty przedmiotów dodającej specjalne właściwości graczowi (np. zwiększające jego punkty obrony)
+- **Chest**, który tworzy obiekt skrzyni będącej kontenerem obiektów klasy **Item**
+- **Gameplay**, który jest klasą realizującą wszystkie akcje w grze, między innymi *bitwę*, bądź *otwieranie skrzyni*.
 
-## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## **Item** 
 
-```
-cd existing_repo
-git remote add origin https://gitlab-stud.elka.pw.edu.pl/arybojad/intergalaktyczna-gra-turowa.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+Klasa **Item**, poza tym że przechowuje atrybuty *nazwa* oraz *wartość*, ma również atrybut *rodzaj*, który określa do czego przyporządkowana jest wartość przedmiotu. Na przykład, kiedy przedmiot jest rodzaju 2 i zostanie podniesiony przez użytkownika, gracz otrzymuje dodatkową liczbę punktów obrony odpowiadającą wartości *value*.
 
-- [ ] [Set up project integrations](https://gitlab-stud.elka.pw.edu.pl/arybojad/intergalaktyczna-gra-turowa/-/settings/integrations)
+    class Item
+    {
+        private:
+            std::string iname;
+            int ivalue;
+            int ikind;
+            // which value represents which kind:
+            // 0: health
+            // 1: weapon_damage
+            // 2: shield
+    };
 
-## Collaborate with your team
+Poza tym, klasa ma również przeciążone operatory potrzebne w klasie **Gameplay** oraz metodę *print*, która wyświetla w terminalu parametry przedmiotu, np.
+    (Blade, 10)
+co oznacza, że przedmiot o nazwie *blade* ma wartość 10. 
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## **Chest**
 
-## Test and Deploy
+Klasa **Chest** tworzy obiekt, który jest kontenerem określonej ilości przedmiotów, które można z niego usunąć metodą *pop_item()*, która przy okazji zwraca też ten przedmiot.
 
-Use the built-in continuous integration in GitLab.
+## **Gameplay**
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Klasa **Gameplay** to najważniejsza klasa realizująca wszystkie akcje w grze oraz zapewniająca interakcję z użytkownikiem. Klasa nie posiada żadnych atrybutów, stworzona została jedynie dla porządkowości kodu, aby widoczne było, które metody odpowiadają za akcję w grze.
 
-***
+Klasa ma 5 metod:
 
-# Editing this README
+    class Gameplay
+    {
+        private:
+        public:
+            Gameplay(){}
+            void disp_battle(Player& player, Enemy& enemy, int& round);
+            void battle(Player &player, Enemy &enemy);
+            void boss_battle(Player &player, Boss &boss);
+            void disp_chest(Player& player, Chest& chest);
+            void draw_battle(Player &player, int const& ek);
+    };
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Dodatkowo w pliku, poza klasą, znajdują się funkcje:
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+    void disp_border();
+    Enemy generate_enemy(int const& ek);
+    std::string draw_rand_name(int const& ek);
 
-## Name
-Choose a self-explaining name for your project.
+### *battle(Player& player, Enemy& enemy)*
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Metoda informuje użytkownika o nadchodzącej walce i wywołuje metodę *disp_battle(...)*, która na wejście otrzymuje obiekt *player*, *enemy* oraz numer rundy walki, która w tej metodzie zwiększana jest o 1 po wykonaniu akcji przez użytkownika.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Użytkownik wybiera, czy chce zaatakować przeciwnika, czy chce się obronić. W przypadku ataku przeciwnika, gracz wybiera *atak specjalny*, który zadaje wrogowi większe obrażenia, jeśli jest on akurat na niego podatny. W kodzie rozwiązane zostało to w taki sposób, że specjalny atak na wroga odpowiada jego rodzajowi, czyli tak naprawdę z jakiego poziomu pochodzi. Ale użytkownik tego nie wie (być może w trakcie gry to rozgryzie).
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+W czasie ataku wróg również zadaje graczowi obrażenia, których wartość wylosowana została w metodzie *enemy.deal_dmg()*
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Druga opcja pozwala na obronę, lecz szansa, że gracz się uzdrowi, zależy od jego obecnych punktów obrony:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+    srand(time(0));
+    int chance = rand() % (100 + player.get_sh());
+    if(chance > 60)
+    {
+        player.heal(50);
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+        cout<<"You healed yourself"<<endl;
+    }
+    else
+    {
+        player.take_damage(enemy.deal_dmg());
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+        cout<<"Enemy hit you for "<<enemy.deal_dmg()<<endl;
+    }
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Jeśli graczowi los się nie powiedzie, zostanie on zaatakowny przez wroga.
+Metoda jest aktywna, dopóki gracz lub przeciwnik nie został zabity.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### *boss_battle(Player &player, Boss &boss)*
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Metoda *boss_battle(...)* działa bardzo podobnie, z taką różnicą, że na wejście metody *battle()* podaje gracza i bossa.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Dodatkowo, po pokonaniu bossa, gracz podnosi przedmiot, który boss miał w swoim posiadaniu.
 
-## License
-For open source projects, say how it is licensed.
+    if(!boss.is_alive())
+        {
+            cout << "You defeated the Boss\nIn return you get ";
+            bitem.print();
+        }
+        else
+            cout << "You were defeated by the boss" << endl;
+        if(bitem.get_ikind() == 0)
+            player.heal(bitem.get_ivalue());
+        else if(bitem.get_ikind() == 1)
+            player.pick_up(bitem.get_ivalue());
+        else
+            player.set_sh(player.get_sh() + bitem.get_ivalue());
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+### *disp_chest(Player& player, Chest& chest)*
+
+Zadaniem metody *disp_chest(...)* jest wyświetlenie przedmiotu wylosowanego ze skrzyni (obiekt klasy **Chest**), a następnie nadania graczowi jego odpowiednich wartości. Wykorzystane przy tym zostały rodzaje przedmiotów (atrybut klasy **Item**). Przed podniesienem przedmiotów, gracz jest pytany, czy wyraża na to zgodę.
+
+
+    if(opt[0] == 'Y' || opt[0] == 'y')
+            {
+                usleep(3 * microsecond);
+                if(item.get_ikind() == 0)
+                {
+                    player.heal(item.get_ivalue());
+                    cout << '\n' << item.get_iname()<< " healed you for "<<item.get_ivalue()<<endl;
+                }
+                else if(item.get_ikind() == 1)
+                {
+                    player.pick_up(item.get_ivalue());
+                    cout << '\n' << item.get_iname()<< " increased your damage by "<<item.get_ivalue()<<" points"<<endl;
+                }
+                else
+                {
+                    player.set_sh(player.get_sh() + item.get_ivalue());
+                    cout << '\n' <<item.get_iname()<< " increased your shield by "<<item.get_ivalue()<<" points"<<endl;
+                }
+
+Na sam koniec wyświetlone zostają nowe parametry gracza.
+
+### *draw_battle(Player &player, int const& ek)*
+
+Zadaniem tej metody jest wywołanie funkji *battle(...)*, uprzednio tworząc wroga przy pomocy funkcji *generate_enemy(ek)* (ona z kolei korzysta z funkcji *draw_rand_name(int const& ek)*, w celu nadania wrogowi nazwy). Szansa, że walka zostanie wywołana jest równa 20%.
+
+    if (rand() % 5 == 0)
+        {
+            Enemy rand_enemy = generate_enemy(ek);
+            cout << "You were unexpectedly attacted by an unknown enemy" << endl;
+            battle(player, rand_enemy);
+        }
+
+Ta metoda poukrywana została w różnych miejscach w funkcji *plot()* w pliku `main_game.cpp`, w móc zaskakiwać użytkownika na różnych etapach gry.
+
+
+
+
+# Interfejs
+
+Poniżej przedstawiono krótki opis interfejsu
+
+![](/do_dok/interfejs.png)
+
+Komunikacja z użytkownikiem przebiega poprzez interfejs w terminalu, który napisany został w pliku *Gameplay.cpp*
+
+# Autorzy
+- Filip Szczygielski
+- Mikołaj Wewiór
+- Adam Rybojad

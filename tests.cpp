@@ -12,9 +12,9 @@ using namespace std;
 
 void create_player(int mh, int wd, int sh, int h)
 {
-    Player *player = new Player(h, mh, wd, sh);
+    Player *player = new Player(h, wd, sh);
     if (player->get_health() == h &&
-        player->get_mh() == mh && player->get_wd() == wd &&
+        player->get_mh() == 100 && player->get_wd() == wd &&
         player->get_sh() == sh)
         cout << "Create player passed" << endl;
     else
@@ -32,7 +32,7 @@ void create_enemy(int h, int wd, int ek)
 
 void heal_player(const int &potion)
 {
-    Player *player = new Player(10, 20, 5, 5);
+    Player *player = new Player(10, 5, 5);
     player->heal(potion);
     if (player->get_health() == 15)
         cout << "Heal player passed" << endl;
@@ -42,7 +42,7 @@ void heal_player(const int &potion)
 
 void max_heal_player(const int &potion)
 {
-    Player *player = new Player(10, 20, 5, 5);
+    Player *player = new Player(10, 5, 5);
     player->heal(potion);
     if (player->get_health() == 20)
         cout << "Max heal player passed" << endl;
@@ -52,7 +52,7 @@ void max_heal_player(const int &potion)
 
 void pick_up_player(int new_wd)
 {
-    Player *player = new Player(10, 20, 5, 5);
+    Player *player = new Player(10, 5, 5);
     player->pick_up(new_wd);
     if (player->get_wd() == 10)
        cout << "Pick up player passed" << endl;
@@ -129,7 +129,7 @@ void create_test_boss(int h, int wd, int ek, Item &si)
 void test_attack_kind()
 {
     Enemy enemy = Enemy("Wrog", 20, 2, 1);
-    Player player = Player(10, 20, 6, 1);
+    Player player = Player(10, 6, 1);
     int ak1 = 1;
     int ak2 = 2;
     if(player.attack_kind(enemy, ak1) == 9 && player.attack_kind(enemy, ak2) == 6)

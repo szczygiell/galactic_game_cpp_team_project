@@ -288,6 +288,11 @@ void Gameplay::draw_battle(Player &player, int const& ek)
         Enemy rand_enemy = generate_enemy(ek);
         cout << "You were unexpectedly attacted by an unknown enemy" << endl;
         battle(player, rand_enemy);
+    }if (rand() % 5 == 0)
+    {
+        Enemy rand_enemy = generate_enemy(ek);
+        cout << "You were unexpectedly attacted by an unknown enemy" << endl;
+        battle(player, rand_enemy);
     }
 }
 
