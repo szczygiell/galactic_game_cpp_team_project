@@ -227,33 +227,34 @@ std::string draw_rand_name(int const& ek)
 {
     srand(time(0));
     int temp = rand() % 3;
+    cout<<temp<<endl;
     if(ek == 0)
-        if(temp = 0)
+        if(temp == 0)
             return "Pythonian guardian";
-        if(temp = 1)
+        if(temp == 1)
             return "Overflow beast";
-        if(temp = 2)
-            return "";
+        if(temp == 2)
+            return "Dynamic memory allocation";
     if(ek == 1)
-        if(temp = 0)
+        if(temp == 0)
             return "Integral guards";
-        if(temp = 1)
+        if(temp == 1)
             return "Fouriers nemezis";
-        if(temp = 2)
+        if(temp == 2)
             return "Taylor The Humanoid";
     if(ek == 2)
-        if(temp = 0)
+        if(temp == 0)
             return "Electric eel";
-        if(temp = 1)
+        if(temp == 1)
             return "Evil Shipbuilder";
-        if(temp = 2)
+        if(temp == 2)
             return "";
     if(ek == 3)
-        if(temp = 0)
+        if(temp == 0)
             return "Diabolic Segmentation fault";
-        if(temp = 1)
+        if(temp == 1)
             return "Memorius Referencus";
-        if(temp = 2)
+        if(temp == 2)
             return "";
     else
         return "undefined kind of creature";
@@ -267,8 +268,8 @@ Enemy generate_enemy(int const& ek)
     //  trzeba to ogarnąć
 
     srand(time(0));
-    int ehealth = (rand() % (5+ ek))*5;
-    int ewd = rand() % (5 + ek);
+    int ehealth = (rand() % (5+ ek))*5 + 10;
+    int ewd = rand() % (5 + ek) + 7;
 
     Enemy gienek = Enemy(draw_rand_name(ek), ehealth, ewd, ek);
 
@@ -282,12 +283,12 @@ Enemy generate_enemy(int const& ek)
 void Gameplay::draw_battle(Player &player, int const& ek)
 {
     cout << "1 - weszło do funckji" << endl;
-    srand(time(0));
-    if (rand() % 5 == 0)
-    {
+    // srand(time(0));
+    // if (rand() % 5 == 0)
+    // {
         Enemy rand_enemy = generate_enemy(ek);
         cout << "You were unexpectedly attacted by an unknown enemy" << endl;
         battle(player, rand_enemy);
-    }
+    //}
 }
 
