@@ -9,23 +9,21 @@ using namespace std;
 class Player : public Person
 {
     private:
-        int max_health;
+        const int max_health = 100;
         int weapon_damage;
         int shield;
 
     public:
-        Player(int h, int mh, int wd, int sh):Person(h)
+        Player(int h, int wd, int sh):Person(h)
         {
-            max_health = mh;
             weapon_damage = wd;
             shield = sh;
         }
 
-        void set_mh(int mh);
         void set_wd(int wd);
         void set_sh(int sh);
         int get_h() {return this->health;}
-        int get_mh() {return this->max_health;}
+        const int get_mh() {return this->max_health;}
         int get_wd() {return this->weapon_damage;}
         int get_sh() {return this->shield;}
         void pick_up(const int& new_wd);

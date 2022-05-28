@@ -3,17 +3,22 @@
 #include "Player.h"
 #include "Enemy.h"
 
-/*przebudowalem gre w taki sposob ze enemy w konstruktorze ma imie
-randomowo losowana nazwa enemy bedzie dla funkcji ktora bedzie losowala
-czy w czasie gry ma odbyc sie bitwa z jakimis wrogrami, ktorych
-imiona zostana wylosowane z funkcji draw_rand_name
+/*
+uwagi dotyczace kodu
+-czy korzystamy gdzies z bezparametrowego konstruktora enemy
 
-zmienilem tez rodzaje wroga w taki sposob ze jeden rodzaj jest na planete
-to zalatwia juz poziom trudnosci w jakis sposob biorac pod uwage
-ze jedna planeta to jeden lvl wyzej
+-czy gameplay wgl musi byc klasa xdd nwm czy kozuszek sie o to nie przyczepi
+ze obiekt gameplay to wsm nic nie robi, w dokumentacji napisalem ze klasa
+zostala stworzona dla czytelnosci kodu
+
+-moze powinnismy ujednolicic wylapywanie invalid inputu w calym programie
+bo mamy na pare roznych sposobow to napisane
+
+-jesli chest zawsze ma te same itemy to imo powinnismy dodawanie itemow zrobic juz w
+konstruktorze Chesta
+
 */
 
-//DODAC DELAYA KTORY DZIALA I DLA UNIXA I DLA WINDOWSA
 //POPRAWIC SHIELDA BO GOWNO DAJE I ZABIERA HP
 //ZMODYFIKOWAC ITEMY W SKRZYNCE TAK ABY TEZ ZABIERALY HP , WD itd...
 
@@ -33,7 +38,7 @@ void plot()
     Gameplay game;
     Chest chest = Chest();
     chest.add_items();
-    Player player(100, 100, 10, 1);
+    Player player(100, 10, 1);
     cout <<
     "\nYear 2154. Human civiliation is at edge of collapse.\n\
     You have been sent on a special mission to locate the mythical resource\n\
