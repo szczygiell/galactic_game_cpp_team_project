@@ -16,6 +16,18 @@ void disp_border()
     cout << '\n' << hash << '\n'<< std::endl;
 }
 
+void disp_atributes(Player& player)
+{
+    disp_border();
+    cout << "Current atributes:\n"<<endl;
+    cout << "\t**Player (You)**" << endl;
+    cout << "\tAttack points: " << player.get_wd() << endl;
+    cout << "\tProtection points: " << player.get_sh() << endl;
+    cout << "\tHealth: " << player.get_health() << "/" << player.get_mh() << endl;
+    cout << "\n";
+    disp_border();
+}
+
 void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
 {
     disp_border();
@@ -38,11 +50,13 @@ void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
 void Gameplay::boss_battle(Player &player, Boss &boss)
 {
     battle(player, boss);
+    usleep(2 * microsecond);
     Item bitem = boss.get_bitem_info();
     if(!boss.is_alive())
     {
         cout << "You defeated the Boss\nIn return you get ";
         bitem.print();
+        disp_atributes(player);
     }
     else
         cout << "You were defeated by the boss" << endl;
@@ -52,11 +66,12 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
         player.pick_up(bitem.get_ivalue());
     else
         player.set_sh(player.get_sh() + bitem.get_ivalue());
+    usleep(4 * microsecond);
 }
 
 void Gameplay::battle(Player &player, Enemy &enemy)
 {
-    cout << "Press any key to continue...\n" << endl;
+    cout << "Press 'ENTER' key to continue...\n" << endl;
     cin.get();
     disp_border();
     cout << "!!!WATCH OUT FOR ENEMY!!!" << endl;
@@ -137,15 +152,15 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                 }
                 else
                 {
-                    player.take_damage(enemy.deal_dmg());
-
-                    cout<<"Enemy hit you for "<<enemy.deal_dmg()<<endl;
+                    int damage = enemy.deal_dmg() * 0.5;
+                    player.take_damage(damage);
+                    cout<<"Enemy hit you for "<<damage<<endl;
                 }
                 cond = false;
             }
             else
             {
-                cout << "Enter valid value" << endl;
+                cout << "\nEnter valid value!\n" << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
@@ -161,7 +176,7 @@ void Gameplay::battle(Player &player, Enemy &enemy)
     if(!enemy.is_alive())
     {
         usleep(3 * microsecond);
-        cout << "\nYOU WON...\n Congratulations!\n\n" << endl;
+        cout << "\nYOU WON...\nCongratulations!\n\n" << endl;
     }
 }
 
@@ -172,7 +187,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
     string opt;
     Item item = chest.pop_item();
     cout << "\tYou have found a chest. Inside is "<< item.get_iname() <<endl;
-    cout << "Do you wnat to pick it up"<<endl;
+    cout << "\tDo you wnat to pick it up"<<endl;
     cout << "\t\t(y/Y) yes " <<endl;
     cout << "\t\t(n/N) no" <<endl;
     bool cond= true;
@@ -212,15 +227,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
         }
     }
     usleep(3 * microsecond);
-    cout << "\n";
-    disp_border();
-    cout << "Current atributes:\n"<<endl;
-    cout << "\t**Player (You)**" << endl;
-    cout << "\tAttack points: " << player.get_wd() << endl;
-    cout << "\tProtection points: " << player.get_sh() << endl;
-    cout << "\tHealth: " << player.get_health() << "/" << player.get_mh() << endl;
-    cout << "\n";
-    disp_border();
+    disp_atributes(player);
 }
 
 std::string draw_rand_name(int const& ek)
@@ -244,51 +251,36 @@ std::string draw_rand_name(int const& ek)
             return "Taylor The Humanoid";
     if(ek == 2)
         if(temp == 0)
-            return "Electric eel";
+            return "Low-Pass droid";
         if(temp == 1)
-            return "Evil Shipbuilder";
+            return "Evil Souther world scheme";
         if(temp == 2)
-            return "";
+            return "Flail constructor+";
     if(ek == 3)
         if(temp == 0)
-            return "Diabolic Segmentation fault";
+            return "Melson";
         if(temp == 1)
-            return "Memorius Referencus";
+            return "Killer robo-wolf";
         if(temp == 2)
-            return "";
+            return "Selfdriving Hardcore Skoda 105";
     else
         return "undefined kind of creature";
 }
 
 Enemy generate_enemy(int const& ek)
 {
-    // problemem z tym że ta walka od razu się kończy jest to że z jakiegoś
-    // przypisuje mu 0 zdrowia
-    // jeśli usunie się tego ifa z funkcji draw_battle to jest git
-    //  trzeba to ogarnąć
-
     srand(time(0));
     int ehealth = (rand() % (5+ ek))*5 + 10;
     int ewd = rand() % (5 + ek) + 7;
-
-    Enemy gienek = Enemy(draw_rand_name(ek), ehealth, ewd, ek);
-
-    // cout << "\n\n"<< gienek.get_name() << '\n' << gienek.get_health()
-    // << "\t=\t" << gienek.get_ehealth() << '\n' << gienek.get_ewd() << "\n\n" << endl;
-
-    return gienek;
+    Enemy rand_enemy = Enemy(draw_rand_name(ek), ehealth, ewd, ek);
+    return rand_enemy;
 }
 
 
 void Gameplay::draw_battle(Player &player, int const& ek)
 {
-    cout << "1 - weszło do funckji" << endl;
-    // srand(time(0));
-    // if (rand() % 5 == 0)
-    // {
-        Enemy rand_enemy = generate_enemy(ek);
-        cout << "You were unexpectedly attacted by an unknown enemy" << endl;
-        battle(player, rand_enemy);
-    //}
+    Enemy rand_enemy = generate_enemy(ek);
+    cout << "You were unexpectedly attacted by an unknown enemy" << endl;
+    battle(player, rand_enemy);
 }
 
