@@ -262,6 +262,10 @@ cout<<"\n\nHint:\nAll of your actions have a huge impact on the surrounding worl
 
 int main()
 {
+    disp_border_in_main();
+    cout<<"\n\t\t\tAMF STUDIO\n\t\t\t presents\n\t\tThe Finale Exam of Humanity\n"<<endl;
+    disp_border_in_main();
+    cin.get();
     cout << "! if you want to stop the program press '^C' !\n" << endl;
     cout << "Welcome to our game\nWould you like to play it?" << endl;
     cout << "\t\t(y/Y) yes " <<endl;
