@@ -54,18 +54,19 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
     Item bitem = boss.get_bitem_info();
     if(!boss.is_alive())
     {
+        if(bitem.get_ikind() == 0)
+            player.heal(bitem.get_ivalue());
+        else if(bitem.get_ikind() == 1)
+            player.pick_up(bitem.get_ivalue());
+        else
+            player.set_sh(player.get_sh() + bitem.get_ivalue());
         cout << "You defeated the Boss\nIn return you get ";
         bitem.print();
         disp_atributes(player);
     }
     else
         cout << "You were defeated by the boss" << endl;
-    if(bitem.get_ikind() == 0)
-        player.heal(bitem.get_ivalue());
-    else if(bitem.get_ikind() == 1)
-        player.pick_up(bitem.get_ivalue());
-    else
-        player.set_sh(player.get_sh() + bitem.get_ivalue());
+    
     usleep(4 * microsecond);
 }
 
@@ -208,7 +209,7 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
                     cout << '\n' << item.get_iname()<< " increased your damage by "<<item.get_ivalue()<<" points"<<endl;
                 else
                     cout << '\n' << item.get_iname()<< " damaged you for "<<abs(item.get_ivalue())<<" points"<<endl;
-                player.pick_up(item.get_ivalue());
+                player.heal(item.get_ivalue());
             }
             else
             {

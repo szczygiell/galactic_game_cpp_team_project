@@ -21,7 +21,7 @@ class Chest
             items = new Item[10];
             items[0] = Item("Astro Toy Box", -5, 1);
             items[1] = Item("Spear of 1000 moons", 20, 1);
-            items[2] = Item("Photon spear", 20, 2);
+            items[2] = Item("Photon spear", -10, 1);
             items[3] = Item("Healing tears of Holy Mother", 30, 0);
             items[4] = Item("4-dimensional Spikes", -5, 1);
             items[5] = Item("Sharp Lightbringer", 15, 1);

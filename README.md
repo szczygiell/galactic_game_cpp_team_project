@@ -51,10 +51,10 @@ Poza getterami i setterami, klasa player ma również wcześniej wspomnianą met
             int eweapon_damage;
             int ekind;
             //which value represents the planet:
-            //0: PIPR-2
-            //1: ALIN-ANA
-            //2: POEL-4.5P
-            //3: PROI-25
+            //1: PIPR-2
+            //2: ALIN-ANA
+            //3: POEL-4.5P
+            //4: PROI-25
     };
 
 Klasa **Enemy** poza atrybutem otrzymanym z klasy **Person**, posiada atrybut nazwy, punktów ataku oraz rodzaju. W grze rodzaj odpowiada aktualnemu poziomowi gry, które nazwy swoje mają od planet, na których wg fabuły w danej chwili znaduje się gracz. Rodzaj wroga wykorzystywany jest potem w wielu funkcjach i metodach klasy **Gameplay**.
@@ -116,7 +116,27 @@ co oznacza, że przedmiot o nazwie *blade* ma wartość 10.
 
 ## **Chest**
 
-Klasa **Chest** tworzy obiekt, który jest kontenerem określonej ilości przedmiotów, które można z niego usunąć metodą *pop_item()*, która przy okazji zwraca też ten przedmiot.
+Klasa **Chest** tworzy obiekt, który jest kontenerem określonej ilości przedmiotów. Można je z niego usunąć metodą *pop_item()*, która przy okazji zwraca też ten przedmiot. Poniżej pokazano domyślną zawartość kontenera. Znajduje się ona w konstruktorze klasy.
+
+    Chest():item_number(10)
+    {
+        // 0: health
+        // 1: wd
+        // 2: sh
+        items = new Item[10];
+        items[0] = Item("Astro Toy Box", -5, 1);
+        items[1] = Item("Spear of 1000 moons", 20, 1);
+        items[2] = Item("Photon spear", -10, 1);
+        items[3] = Item("Healing tears of Holy Mother", 30, 0);
+        items[4] = Item("4-dimensional Spikes", -5, 1);
+        items[5] = Item("Sharp Lightbringer", 15, 1);
+        items[6] = Item("Space Cola", 10, 2);
+        items[7] = Item("Quantum Guardian Protection", 15, 2);
+        items[8] = Item("Black Hole Elixir", 10, 0);
+        items[9] = Item("Tears of a dying star", 15, 0);
+    }
+
+Jak widać, niektóre wartości przedmiotów mają parametr ujemny, który jest równoważny punktom życia zabranym graczowi.
 
 ## **Gameplay**
 
@@ -192,7 +212,7 @@ Dodatkowo, po pokonaniu bossa, gracz podnosi przedmiot, który boss miał w swoi
 
 ### *disp_chest(Player& player, Chest& chest)*
 
-Zadaniem metody *disp_chest(...)* jest wyświetlenie przedmiotu wylosowanego ze skrzyni (obiekt klasy **Chest**), a następnie nadania graczowi jego odpowiednich wartości. Wykorzystane przy tym zostały rodzaje przedmiotów (atrybut klasy **Item**). Przed podniesienem przedmiotów, gracz jest pytany, czy wyraża na to zgodę.
+Zadaniem metody *disp_chest(...)* jest wyświetlenie przedmiotu wylosowanego ze skrzyni (obiekt klasy **Chest**), a następnie nadania graczowi jego odpowiednich wartości. Wykorzystane przy tym zostały rodzaje przedmiotów (atrybut klasy **Item**). Przed podniesienem przedmiotów, gracz jest pytany, czy wyraża na to zgodę. Gracz musi być czujny, ponieważ przedmiot, który znajduje się w skrzyni, może mu zaszkodzić i odjąć punkty życia.
 
 
     if(opt[0] == 'Y' || opt[0] == 'y')
@@ -215,6 +235,8 @@ Zadaniem metody *disp_chest(...)* jest wyświetlenie przedmiotu wylosowanego ze 
                 }
 
 Na sam koniec wyświetlone zostają nowe parametry gracza.
+
+W pliku odpowiadającym za rozgrywkę i fabułę po wyjściu z metody, sprawdzane jest, czy gracz nadal żyje (jego punkty życia są większe od 0). Wynia to z tego, że przemiotu mogą mu również zadawać obrażenia.
 
 ### *draw_battle(Player &player, int const& ek)*
 

@@ -67,7 +67,7 @@ we will call ECTS-30\n\n\n\n";
     cin.get();
     cout << "Your landing is spotted by air guards\n"<< endl;
     Enemy* air_guard = new Enemy("Air guards", 30, 10, 1);
-    game.battle(player, *air_guard);
+    // game.battle(player, *air_guard);
     if (is_done(player))
         return;
     delete air_guard;
@@ -135,7 +135,7 @@ cout << "\nThe classified location of ECTS-30 is guarded by highly advanced robo
 which you'll have to defeat. But it won't be so easy...\n\n";
     cin.get();
     Boss* robot = new Boss("Guarding robot", 10, 10, 0, *(new Item("Binary Blade", 10, 1)));
-    // game.boss_battle(player, robot);
+    game.boss_battle(player, *robot);
     if (is_done(player))
         return;
     delete robot;
