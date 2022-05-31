@@ -13,7 +13,7 @@ class Gameplay
 
     public:
         Gameplay(){}
-        void disp_battle(Player& player, Enemy& enemy, int& round);
+        void disp_battle(const Player& player, const Enemy& enemy, const int& round) const;
         void battle(Player &player, Enemy &enemy);
         void boss_battle(Player &player, Boss &boss);
         void disp_chest(Player& player, Chest& chest);

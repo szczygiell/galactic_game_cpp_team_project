@@ -9,10 +9,10 @@ class Enemy: public Person
         int eweapon_damage;
         int ekind;
         //which value represents the planet:
-        //0: PIPR-2
-        //1: ALIN-ANA
-        //2: POEL-4.5P
-        //3: PROI-25
+        //1: PIPR-2
+        //2: ALIN-ANA
+        //3: POEL-4.5P
+        //4: PROI-25
 
     public:
         Enemy(std::string n, int h, const int wd, int ek):Person(h)
@@ -23,18 +23,19 @@ class Enemy: public Person
         }
         Enemy()
         {}
+        ~Enemy() { }
 
-        std::string get_name() {return this->name;}
-        int get_ehealth() {return this->health;}
-        int get_ewd() {return this->eweapon_damage;}
-        int get_ekind() {return this->ekind;}
+        std::string get_name() const {return this->name;}
+        int get_ehealth() const {return this->health;}
+        int get_ewd() const {return this->eweapon_damage;}
+        int get_ekind() const {return this->ekind;}
 
         void set_ehealth(int& new_health)
         {
             this->health += new_health;
         }
 
-        bool dodge()
+        bool dodge() const
         {
             srand(time(0));
             int chance = rand() % 10;
@@ -43,7 +44,7 @@ class Enemy: public Person
             return false;
         }
 
-        int deal_dmg()
+        int deal_dmg() const
         {
             srand(time(0));
             int dmg = rand() % 11;
