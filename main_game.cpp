@@ -27,6 +27,10 @@ konstruktorze Chesta
 using namespace std;
 
 
+// problem z wyświetlaniem current atributes poza walką
+// typy bosów
+
+
 bool is_done(Player& player)
 {
     if (!player.is_alive())
@@ -74,7 +78,7 @@ we will call ECTS-30\n\n\n\n";
 
     if (rand() % 4 == 0)
     {
-        // game.draw_battle(player, 0);
+        game.draw_battle(player, 0);
         if (is_done(player))
         return;
 
@@ -86,7 +90,7 @@ we will call ECTS-30\n\n\n\n";
     cout << "\nYou have been heard by patrol drones!\n\n";
     Enemy* drones = new Enemy("Patrol drones", 50, 10, 1);
     cin.get();
-    // game.battle(player, *drones);
+    game.battle(player, *drones);
     if (is_done(player))
         return;
     delete drones;
@@ -112,7 +116,7 @@ maybe later he could help you find ECTS"<<endl;
             cout<<"Suddenly, more scientists appear behind you, it turned out that it was a trap"<<endl;
             Enemy* scientists = new Enemy("Crazy scientists", 40, 15, 1);
             cin.get();
-            // game.battle(player, scientists);
+            game.battle(player, *scientists);
             if (is_done(player))
                 return;
             delete scientists;
@@ -135,7 +139,7 @@ cout << "\nThe classified location of ECTS-30 is guarded by highly advanced robo
 which you'll have to defeat. But it won't be so easy...\n\n";
     cin.get();
     Boss* robot = new Boss("Guarding robot", 10, 10, 0, *(new Item("Binary Blade", 10, 1)));
-    // game.boss_battle(player, robot);
+    game.boss_battle(player, *robot);
     if (is_done(player))
         return;
     delete robot;
@@ -180,7 +184,7 @@ they refuse to help you." << endl;
             cout<<"The galactic traders were not scared of you and engaged in combat!\n"<<endl;
             Enemy* traders = new Enemy("Galactic traders", 40, 15, 2);
             cin.get();
-            // game.battle(player, *traders);
+            game.battle(player, *traders);
             if (is_done(player))
                 return;
             delete traders;
@@ -208,7 +212,7 @@ the proper occasion to imperceptibly intrude into it.\n\n\n" << endl;
     cin.get();
     cout << "The Algebra guard spotted you!" << endl;
     Enemy* algebra_guard = new Enemy("Algebra guard", 40, 15, 2);
-    // game.battle(player, algebra_guard);
+    game.battle(player, *algebra_guard);
     if (is_done(player))
         return;
     delete algebra_guard;
@@ -216,7 +220,7 @@ the proper occasion to imperceptibly intrude into it.\n\n\n" << endl;
     if (rand() % 4 == 0)
     {
         cout << "You have heard some strange noises! An unexpected enemy?!\n" << endl;
-        // game.draw_battle(player, 1);
+        game.draw_battle(player, 1);
         if (is_done(player))
             return;
 
@@ -228,7 +232,7 @@ the proper occasion to imperceptibly intrude into it.\n\n\n" << endl;
     cout << "\nOops! You entered the wrong area! The Calculus turrets are aimed at you!\n\n";
     Enemy* turrets = new Enemy("Calculus turrets", 30, 30, 2);
     cin.get();
-    // game.battle(player, turrets);
+    game.battle(player, *turrets);
     if (is_done(player))
         return;
     delete turrets;
@@ -238,7 +242,7 @@ Just as you slammed the hatch, the room turns into the Hyperdimmentional Matrix,
 which secures ECTS-30! ";
     cin.get();
     Boss* matrix = new Boss("Hyperdimmentional Matrix", 10, 50, 0, *(new Item("Banach–Tarski paradox proof", 20, 1)));
-    // game.boss_battle(player, matrix);
+    game.boss_battle(player, *matrix);
     if (is_done(player))
         return;
     delete matrix;
@@ -267,10 +271,11 @@ cout<<"\n\nHint:\nAll of your actions have a huge impact on the surrounding worl
 int main()
 {
     disp_border_in_main();
-    cout<<"\n\t\t\tAMF STUDIO\n\t\t\t presents\n\t\tThe Finale Exam of Humanity\n"<<endl;
+    cout<<"\n\t\t\tAMF STUDIO\n\t\t\t presents\n\t\t'The Finale Exam of Humanity\n'"<<endl;
     disp_border_in_main();
+    cout << "\n! if you want to stop the program press '^C' !" << endl;
+    cout << "\n\nPress ENTER to continue...\n" << endl;
     cin.get();
-    cout << "! if you want to stop the program press '^C' !\n" << endl;
     cout << "Welcome to our game\nWould you like to play it?" << endl;
     cout << "\t\t(y/Y) yes " <<endl;
     cout << "\t\t(n/N) no" <<endl;
