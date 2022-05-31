@@ -28,12 +28,12 @@ void disp_atributes(Player& player)
     disp_border();
 }
 
-void Gameplay::disp_battle(Player& player, Enemy& enemy, int& round)
+void Gameplay::disp_battle(const Player& player, const Enemy& enemy, const int& round) const
 {
     disp_border();
     cout << "\t\t\tCurrent stage: " << "\t round: "<< round << endl;
     cout << "\tOptions:\n";
-    cout << "\t\t(1) Attack --> Draw special attack from 0 to 3" << endl;
+    cout << "\t\t(1) Attack --> Draw special attack from 1 to 4" << endl;
     cout << "\t\t(2) Defend and regenerate" << endl;
     cout << "\n";
     cout << "\n";
@@ -110,7 +110,7 @@ void Gameplay::battle(Player &player, Enemy &enemy)
                         cout << "Invalid Value. Type again... [hint: Input should be a number]\n";
                         cin >> option2;
                     }
-                    if(option2 == 0||option2 == 1||option2 == 2||option2 == 3)
+                    if(option2 == 1||option2 == 2||option2 == 3||option2 == 4)
                     {
                         usleep(3 * microsecond);
                         if(enemy.dodge() == false)
@@ -204,8 +204,11 @@ void Gameplay::disp_chest(Player& player, Chest& chest)
             }
             else if(item.get_ikind() == 1)
             {
+                if(item.get_ivalue() >= 0)
+                    cout << '\n' << item.get_iname()<< " increased your damage by "<<item.get_ivalue()<<" points"<<endl;
+                else
+                    cout << '\n' << item.get_iname()<< " damaged you for "<<abs(item.get_ivalue())<<" points"<<endl;
                 player.pick_up(item.get_ivalue());
-                cout << '\n' << item.get_iname()<< " increased your damage by "<<item.get_ivalue()<<" points"<<endl;
             }
             else
             {

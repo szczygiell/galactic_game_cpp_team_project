@@ -241,6 +241,6 @@ Poniżej przedstawiono krótki opis interfejsu
 Komunikacja z użytkownikiem przebiega poprzez interfejs w terminalu, który napisany został w pliku *Gameplay.cpp*
 
 # Autorzy
-- Filip Szczygielski
-- Mikołaj Wewiór
-- Adam Rybojad
+- Rybojad Adam
+- Szczygielski Filip
+- Wewiór Mikołaj

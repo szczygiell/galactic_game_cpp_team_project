@@ -34,7 +34,7 @@ void Player::heal(const int &potion)
         }
 }
 
-int Player::attack_kind(Enemy& enemy, int akind)
+int Player::attack_kind(Enemy& enemy, const int& akind)
 {
     if(akind == enemy.get_ekind())
         return this->weapon_damage + 0.5 * this->weapon_damage;

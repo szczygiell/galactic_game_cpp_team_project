@@ -14,15 +14,29 @@ zostala stworzona dla czytelnosci kodu
 -moze powinnismy ujednolicic wylapywanie invalid inputu w calym programie
 bo mamy na pare roznych sposobow to napisane
 
+DONE
 -jesli chest zawsze ma te same itemy to imo powinnismy dodawanie itemow zrobic juz w
 konstruktorze Chesta
 
 */
-
+//DONE
 //POPRAWIC SHIELDA BO GOWNO DAJE I ZABIERA HP
+//DONE
 //ZMODYFIKOWAC ITEMY W SKRZYNCE TAK ABY TEZ ZABIERALY HP , WD itd...
 
 using namespace std;
+
+
+bool is_done(Player& player)
+{
+    if (!player.is_alive())
+    {
+        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+        return true;
+    }
+    return false;
+}
+
 
 void disp_border_in_main()
 {
@@ -37,7 +51,7 @@ void plot()
     int mercy = 0;
     Gameplay game;
     Chest chest = Chest();
-    chest.add_items();
+    // chest.add_items();
     Player player(100, 10, 1);
 
 
@@ -52,33 +66,31 @@ Your task is to defeat the enemies guarding the mystery of the resource, which\n
 we will call ECTS-30\n\n\n\n";
     cin.get();
     cout << "Your landing is spotted by air guards\n"<< endl;
-    Enemy air_guard = Enemy("Air guards", 30, 10, 0);
-    // game.battle(player, air_guard);
-    if (!player.is_alive())
-    {
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+    Enemy* air_guard = new Enemy("Air guards", 30, 10, 1);
+    game.battle(player, *air_guard);
+    if (is_done(player))
         return;
-    }
+    delete air_guard;
+
     if (rand() % 4 == 0)
     {
         // game.draw_battle(player, 0);
-        if (!player.is_alive())
-        {
-            cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
-            return;
-        }
+        if (is_done(player))
+        return;
+
     }
     cout << "You find unidentified package... Could it be the ECTS-30???\n\n";
     game.disp_chest(player, chest);
-    cout << "\nYou have been heard by patrol drones!\n\n";
-    Enemy drones = Enemy("Patrol drones", 50, 10, 0);
-    cin.get();
-    // game.battle(player, drones);
-    if (!player.is_alive())
-    {
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+    if (is_done(player))
         return;
-    }
+    cout << "\nYou have been heard by patrol drones!\n\n";
+    Enemy* drones = new Enemy("Patrol drones", 50, 10, 1);
+    cin.get();
+    // game.battle(player, *drones);
+    if (is_done(player))
+        return;
+    delete drones;
+
 cout << "You reached secret research facility...\n";
 cout << "After you get inside, you find a weird old scientist who runs up to you and\n\
 asks you for help in finding his research documents that he has been working on all his life. \n\
@@ -98,14 +110,13 @@ cout<<"You decided, you were going to help scientist,\n\
 maybe later he could help you find ECTS"<<endl;
             cout<<"The scientist takes you deeper and deeper into the facility."<<endl;
             cout<<"Suddenly, more scientists appear behind you, it turned out that it was a trap"<<endl;
-            Enemy scientists = Enemy("Crazy scientists", 40, 15, 0);
+            Enemy* scientists = new Enemy("Crazy scientists", 40, 15, 1);
             cin.get();
             // game.battle(player, scientists);
-            if (!player.is_alive())
-            {
-                cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+            if (is_done(player))
                 return;
-            }
+            delete scientists;
+
             cout<<"You managed to kill all scientists and went on to the main room of the facility"<<endl;
 
         }
@@ -123,13 +134,12 @@ maybe later he could help you find ECTS"<<endl;
 cout << "\nThe classified location of ECTS-30 is guarded by highly advanced robot\n\
 which you'll have to defeat. But it won't be so easy...\n\n";
     cin.get();
-    Boss robot = Boss("Guarding robot", 10, 10, 0, *(new Item("Binary Blade", 10, 1)));
+    Boss* robot = new Boss("Guarding robot", 10, 10, 0, *(new Item("Binary Blade", 10, 1)));
     // game.boss_battle(player, robot);
-    if (!player.is_alive())
-    {
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+    if (is_done(player))
         return;
-    }
+    delete robot;
+
 cout << "The robot has been defeated and his cold metal body was lying at your feet.\n\
 Unfortunetelly, despite searching whole reasearch facility, you couldn't any ECTS-30 there.\n\
 But you have not given up hope, thanks to your above-average engineering skills, you managed\n\
@@ -149,10 +159,9 @@ of attacks. Try to figure out which attack is most effective, this way fight wil
 
 // Planet 2:
 
-    cout << "Just after your take-off from Pipr-2 you came across new problems. The Great PROI nebula\n\
+    cout << "Just after your take-off from PIPR-2 you came across new problems. The Great PROI nebula\n\
 absorbed energy of your ship. You had to stop and recharge the system at the dwarf planet 011B. While you were\n\
-waiting to continue the mission you spotted another machine way off in the distance. You thought there\n\
-could be an opportunity to get some energy resources.\n\
+waiting to continue the mission you spotted another vehicle way off in the distance.\n\
 You decided to come closer but also stay hidden and see what's going on there. You spotted that these machines belongs to the\n\
 galactic traders. You peeked out from the rocks and spoke to the traders. After asking for some energy batteries\n\
 they refuse to help you." << endl;
@@ -169,22 +178,20 @@ they refuse to help you." << endl;
             cond10 =false;
             cout << "\nYou told them that you really need their parts and if they don't give you them you will take it by force." << endl;
             cout<<"The galactic traders were not scared of you and engaged in combat!\n"<<endl;
-            Enemy traders = Enemy("Galactic traders", 40, 15, 1);
+            Enemy* traders = new Enemy("Galactic traders", 40, 15, 2);
             cin.get();
-            // game.battle(player, traders);
-            if (!player.is_alive())
-            {
-                cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+            // game.battle(player, *traders);
+            if (is_done(player))
                 return;
-            }
-cout<<"You managed to kill all of the traders and take the resources that you need for your jurney\n\
-and came back to your ship.\n"<<endl;
+            delete traders;
+
+cout<<"You managed to kill all of the traders and take the resources that you need for your jurney.\n"<<endl;
             // można by tu dodać jeszcze opcję ze skrzynią np?
         }
         else if (opt10[0] == 'N' || opt10[0] == 'n')
         {
             mercy++;
-            cout<<"You decided that the risk of fighting these aliensis  is too high and came back to your ship.\n"<<endl;
+            cout<<"You decided that the risk of fighting these aliensis is too high and came back to your ship.\n"<<endl;
             cond10 = false;
         }
         else
@@ -197,54 +204,51 @@ and came back to your ship.\n"<<endl;
 "You have finally arrived at the ALIN-ANA. During your way you got an information about the train transport that\n\
 probably contains ECTS-30 resources. You land behind the hill nearby the magnetic railway and started planning the heist.\n\
 After spending some time at the peak of the hill you finally spotted the aproaching transport convoy. You waited for\n\
-the proper occasion and intruded into imperceptibly.\n\n\n" << endl;
+the proper occasion to imperceptibly intrude into it.\n\n\n" << endl;
     cin.get();
-    cout << "Then the Algebra guard spotted you!" << endl;
-    Enemy algebra_guard = Enemy("Algebra guard", 40, 15, 1);
+    cout << "The Algebra guard spotted you!" << endl;
+    Enemy* algebra_guard = new Enemy("Algebra guard", 40, 15, 2);
     // game.battle(player, algebra_guard);
-    if (!player.is_alive())
-    {
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+    if (is_done(player))
         return;
-    }
+    delete algebra_guard;
+
     if (rand() % 4 == 0)
     {
-        cout << "You have heard some strange noises. Your plan didn't predict anything here!\n" << endl;
+        cout << "You have heard some strange noises! An unexpected enemy?!\n" << endl;
         // game.draw_battle(player, 1);
-        if (!player.is_alive())
-        {
-            cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+        if (is_done(player))
             return;
-        }
+
     }
     cout << "You get into the armory. Maybe there is something interesting?\n\n";
     game.disp_chest(player, chest);
+    if (is_done(player))
+        return;
     cout << "\nOops! You entered the wrong area! The Calculus turrets are aimed at you!\n\n";
-    Enemy turrets = Enemy("Calculus turrets", 30, 30, 1);
+    Enemy* turrets = new Enemy("Calculus turrets", 30, 30, 2);
     cin.get();
     // game.battle(player, turrets);
-    if (!player.is_alive())
-    {
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+    if (is_done(player))
         return;
-    }
-cout << "You reached the main carriage. According to the Pipr-2 robot there should be your goal\n\
-but you know it would be tough fight. Just as you slammed into the room the Hyperdimmentional Matrix\n\
-had activated to defend the ECTS-30 container! ";
+    delete turrets;
+
+cout << "You reached the main carriage. According to the Pipr-2 robot there should be your search target.\n\
+Just as you slammed the hatch, the room turns into the Hyperdimmentional Matrix,\n\
+which secures ECTS-30! ";
     cin.get();
-    Boss matrix = Boss("Hyperdimmentional Matrix", 10, 50, 0, *(new Item("Banach–Tarski paradox proof", 20, 1)));
+    Boss* matrix = new Boss("Hyperdimmentional Matrix", 10, 50, 0, *(new Item("Banach–Tarski paradox proof", 20, 1)));
     // game.boss_battle(player, matrix);
-    if (!player.is_alive())
-    {
-        cout << "\n\nYou, Earht's last hope, didn't manage to save the planet... The era of man has come to an end." << endl;
+    if (is_done(player))
         return;
-    }
+    delete matrix;
+
 cout <<
-"\nThe Hyperdimmentional matrix break up into millions of prime and numbers. You opened the container and found nothing.\n\
-During the fight with the Guardian you didn't realised that some of complex intigers had taken the ECTS-30.\n\
-When you found out that the Engine carriege had gone far far away, you spotted some dim light covered by residues\n\
+"\nThe Hyperdimmentional matrix broke up into millions of prime and numbers. You open the container and found nothing.\n\
+During the fight with the Guardian you didn't realise that some of complex integers had taken the ECTS-30.\n\
+As the Engine carriage was fading away, you spotted some dim light covered by residues\n\
 of Matrix elements. You have dig down to the source of that light and you discovered that your enemies have left\n\
-very minor part of ECTS-30. This quantity will not even provide the energy supply for your ship, but lckily will\n\
+just a fraction of ECTS-30. This quantity will not even provide the energy supply for your ship, but luckily\n\
 will help you found another parts of your main target.\n\n" << endl;
 
 disp_border_in_main();
