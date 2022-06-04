@@ -66,7 +66,7 @@ void Gameplay::boss_battle(Player &player, Boss &boss)
     }
     else
         cout << "You were defeated by the boss" << endl;
-    
+
     usleep(4 * microsecond);
 }
 
@@ -262,11 +262,11 @@ std::string draw_rand_name(int const& ek)
             return "Flail constructor+";
     if(ek == 3)
         if(temp == 0)
-            return "Melson";
+            return "Segmentation Fault";
         if(temp == 1)
-            return "Killer robo-wolf";
+            return "Dynamic memory allocation";
         if(temp == 2)
-            return "Selfdriving Hardcore Skoda 105";
+            return "Interplanetary Const";
     else
         return "undefined kind of creature";
 }

@@ -248,7 +248,7 @@ which secures ECTS-30! ";
     delete matrix;
 
 cout <<
-"\nThe Hyperdimmentional matrix broke up into millions of prime and numbers. You open the container and found nothing.\n\
+"\nThe Hyperdimmentional matrix broke up into millions of prime and complex numbers. You open the container and found nothing.\n\
 During the fight with the Guardian you didn't realise that some of complex integers had taken the ECTS-30.\n\
 As the Engine carriage was fading away, you spotted some dim light covered by residues\n\
 of Matrix elements. You have dig down to the source of that light and you discovered that your enemies have left\n\
@@ -265,13 +265,129 @@ cout<<"\n\nHint:\nAll of your actions have a huge impact on the surrounding worl
 
 // Planeta 3:
 
+    cout <<"With small particle of ECTS-30 you decided to contact the best expert on ECTS, Proffesor Little Coat.\n\
+    After long journey you finally arrived at PROI-25, planet where proffesor had his lab. \n\
+    Unfortunately, you did not find the professor at his place, the whole laboratory was broken\n\
+    and you could see at first glance that there was a fight here. After searching for a while,\n\
+    you found a card left by former corrupt students who kidnapped the scientist and want\n\
+    to take revenge on him for the wasted years at the university.\n\
+    Without hesitating, you followed the kidnappers"<<endl;
+    cin.get();
 
+    if (rand() % 4 == 0)
+    {
+        cout<<"You hear starnge sound. Be careful! You have been unexpectedly attacked!"<<endl;
+        game.draw_battle(player, 3);
+        if (is_done(player))
+        return;
+
+    }
+    cout<<"tracking down students was not difficult thanks to their distinctive smell\n\
+    and after a while you managed to reach their hideout. You jump in, but the terrified kidnappers don't defend themselves,\n\
+    they just offer you a deal. If you guess their riddle, you will disperse without a fight, and if you guess wrong,\n\
+    you will have to fight them."<<endl;
+
+    cout << "Do you want to hear the riddle?"<<endl;
+    cout << "\t\t(y/Y) yes " <<endl;
+    cout << "\t\t(n/N) no" <<endl;
+    string opt2;
+    bool cond2= true;
+    while(cond2)
+    {
+        cin >> opt2;
+        if(opt2[0] == 'Y' || opt2[0] == 'y')
+        {
+            mercy++;
+            cond2 =false;
+            string ans;
+            cout << "\nZAGADKA" << endl; // trzeba wymyślić/znaleść zagadkę
+            cout << "1. odp1 \n2. odp2 \n3. odp3 \n4. odp 4"<<endl;
+            cout << "Choose correct answear"<<endl;
+            cin >> ans;
+            if(ans[0] == '2')
+                cout<<"You guessed correctly. You leave the hiding place with the professor and go to his laboratory"<<endl;
+            else if(ans[0] == '1' || ans[0] == '3' || ans[0] == '4')
+            {
+                cout<<"Unfortunately you guessed wrong and kidnappers attack you."<<endl;
+                Enemy* studnappers = new Enemy("Studnappers", 50, 15, 4);
+                cin.get();
+                game.battle(player, *studnappers);
+                if (is_done(player))
+                    return;
+                delete drones;
+            }
+            else
+            {
+                cout<<"You talked nonsense and noone understood you, so kidnappers attack you."<<endl;
+                Enemy* studnappers = new Enemy("Studnappers", 50, 15, 4);
+                cin.get();
+                game.battle(player, *studnappers);
+                if (is_done(player))
+                    return;
+                delete drones;
+            }
+
+        }
+        else if (opt2[0] == 'N' || opt2[0] == 'n')
+        {
+            cout<<"You found something suspicious about this proposal and attacked the kidnappers."<<endl;
+            Enemy* studnappers = new Enemy("Studnappers", 50, 15, 4);
+            cin.get();
+            game.battle(player, *studnappers);
+            if (is_done(player))
+                return;
+            delete drones;
+            cond2 = false;
+        }
+        else
+        {
+            cin.fail();
+            cout<<"Enter valid value"<<endl;
+        }
+    }
+    cout << "Back in the lab, the professor took a small ECTS sample from you and tested it.\n\
+    Thanks to this, he was able to determine where the largest deposits of this material are located in the area.\n\
+    One was not far away, unfortunately it was very well guarded. You decided there was no time to waste and set out to save humanity"<<endl;
+    cin.get();
+
+    cout<<"You've reached your destination, but trouble has started here,\n\
+    well-armed bodyguards are standing at the entrance"<<endl;
+    Enemy* body_guards = new Enemy("Fearless body-guards", 60, 17, 4);
+    cin.get();
+    game.battle(player, *body_guards);
+    if (is_done(player))
+        return;
+    delete body_guards;
+
+    cout << "As you go deeper and deeper into the complex, you find 2 chests.\n\n";
+    game.disp_chest(player, chest);
+    if (is_done(player))
+        return;
+    game.disp_chest(player, chest);
+    if (is_done(player))
+        return;
+
+cout << "\nyou've finally reached the end of your journey.\n\
+There is one last obstacle in the way of your success. ENGINEERING THESIS.\n\
+You enter a room without knowing if you will leave it alive"<<endl;
+    cin.get();
+    if(mercy >=2)
+    {
+        // nie ma walki praca inżynierska wręcza ci ects i mówi coś o twojej szlachetności koniec gry
+    }
+    else
+    {
+        // na początku praca zadaje ci pytanie (ja bym skopiował jakieś z kolosa z proi) i jeśli odpowiesz poprawnie
+        // to zaskoczona twoim dobrym przygotowaniem ma mniejsze wartości życia i obrażeń w trakcie walki
+        // przy błędnej odpowiedzi praca inżynierska atakuje z pełną mocą
+    }
+    // na koniec dałbym creditsy
 }
 
 int main()
 {
     disp_border_in_main();
-    cout<<"\n\t\t\tAMF STUDIO\n\t\t\t presents\n\t\t'The Finale Exam of Humanity\n'"<<endl;
+    cout<<"\n\t\t\tAMF STUDIO\n\t\t\t presents\n\t\t'The Finale Exam of Humanity'\n"<<endl;
     disp_border_in_main();
     cout << "\n! if you want to stop the program press '^C' !" << endl;
     cout << "\n\nPress ENTER to continue...\n" << endl;
