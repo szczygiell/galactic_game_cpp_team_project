@@ -373,15 +373,62 @@ You enter a room without knowing if you will leave it alive"<<endl;
     cin.get();
     if(mercy >=2)
     {
-        // nie ma walki praca inżynierska wręcza ci ects i mówi coś o twojej szlachetności koniec gry
+        cout<<"Thanks to your nobility, the thesis handed ECTS-30 without a fight\n\
+        sand you managed to save humanity"<<endl;
+        cin.get();
+        Boss* thesis = new Boss("Engineering thesis", 0, 10, 4, *(new Item("ECTS-30", 30, 1)));
+        game.boss_battle(player, *thesis);
+        if (is_done(player))
+            return;
+        delete thesis;
     }
     else
     {
-        // na początku praca zadaje ci pytanie (ja bym skopiował jakieś z kolosa z proi) i jeśli odpowiesz poprawnie
-        // to zaskoczona twoim dobrym przygotowaniem ma mniejsze wartości życia i obrażeń w trakcie walki
-        // przy błędnej odpowiedzi praca inżynierska atakuje z pełną mocą
+        string ans2;
+        cout << "Rozważmy następujący fragment kodu:\nstruct Klasa:\n{\nint a;\npublic:\nint b;\n\
+        private:\nint c;\n};\nKtóre z pól klasy Klasa są widoczne prywatnie?\n\nWybierz jedną odpowiedź:\n\
+        1) a i c\n2) tylko c\n 3)tylko a\n4) b i c" << endl;
+        cout << "1. odp1 \n2. odp2 \n3. odp3 \n4. odp 4"<<endl;
+        cout << "Choose correct answear"<<endl;
+        cin >> ans2;
+        if(ans2[0] == '2')
+        {
+            cout<<"Engineering thesis is surprised by your correct answer, you are very well prepared\n\
+            and the thesis attacks with much less force than normal."<<endl;
+            cin.get();
+            Boss* thesis = new Boss("Engineering thesis", 50, 10, 4, *(new Item("ECTS-30", 30, 1)));
+            game.boss_battle(player, *thesis);
+            if (is_done(player))
+                return;
+            delete thesis;
+        }
+        else if(ans2[0] == '1' || ans2[0] == '3' || ans2[0] == '4')
+        {
+            cout<<"Unfortunately, your answer is wrong, the thesis attacks with all its might,\n\
+            your lack of preparation can destroy you"<<endl;
+            cin.get();
+            Boss* thesis = new Boss("Engineering thesis", 100, 20, 4, *(new Item("ECTS-30", 30, 1)));
+            game.boss_battle(player, *thesis);
+            if (is_done(player))
+                return;
+            delete thesis;
+        }
+        else
+        {
+            cout<<"You talked nonsense and the thesis attacks with all its might,\n\
+            your lack of preparation can destroy you"<<endl;
+            cin.get();
+            Boss* thesis = new Boss("Engineering thesis", 100, 20, 4, *(new Item("ECTS-30", 30, 1)));
+            game.boss_battle(player, *thesis);
+            if (is_done(player))
+                return;
+            delete thesis;
+        }
     }
+    cout<<"You saved humanity and solved energy problem on Earth"<<endl;
     // na koniec dałbym creditsy
+    cout<<'Thank you for playing our game. We hope you enjoyed it.\n\
+    Game made by:\nAdam Rybojad\nMikołaj Wewiór\nFilip Szczygielski'<<endl;
 }
 
 int main()
