@@ -79,14 +79,12 @@ void item_print_test(const string n, const int v, const int k)
 void test_chest()
 {
     Chest skrzyneczka;
-    skrzyneczka.add_items();
     skrzyneczka[5].print();
 }
 
 void test_pop_chest()
 {
     Chest skrzyneczka;
-    skrzyneczka.add_items();
     for(int i=0; i<10;i++)
         skrzyneczka[i].print();
     cout<<endl;
@@ -155,9 +153,8 @@ int main()
     // Gameplay game;
     // game.boss_battle(player, boss);
     // Chest chest = Chest();
-    // chest.add_items();
     // game.disp_chest(player, chest);
-    //test_pop_chest();
+    // test_pop_chest();
 
     test_enemy_take_damage(7);
     test_is_enemy_alive();

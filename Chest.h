@@ -16,8 +16,8 @@ class Chest
         Chest():item_number(10)
         {
             // 0: health
-            // 1: wd
-            // 2: sh
+            // 1: wd - damage
+            // 2: sh - shield
             items = new Item[10];
             items[0] = Item("Astro Toy Box", -5, 1);
             items[1] = Item("Spear of 1000 moons", 20, 1);
@@ -30,13 +30,8 @@ class Chest
             items[8] = Item("Black Hole Elixir", 10, 0);
             items[9] = Item("Tears of a dying star", 15, 0);
         }
-        // Chest(int ammount):item_number(ammount)
-        // {
-        //     items = new Item[item_number];
-        // }
         int get_num() {return this->item_number;}
 
-        // void add_items();
         Item operator[](int const id){return this->items[id];}
         Item pop_item();
 };

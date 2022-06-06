@@ -12,7 +12,6 @@ class Enemy: public Person
         //1: PIPR-2
         //2: ALIN-ANA
         //3: POEL-4.5P
-        //4: PROI-25
 
     public:
         Enemy(std::string n, int h, const int wd, int ek):Person(h)

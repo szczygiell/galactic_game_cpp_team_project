@@ -3,32 +3,9 @@
 #include "Player.h"
 #include "Enemy.h"
 
-/*
-uwagi dotyczace kodu
--czy korzystamy gdzies z bezparametrowego konstruktora enemy
-
--czy gameplay wgl musi byc klasa xdd nwm czy kozuszek sie o to nie przyczepi
-ze obiekt gameplay to wsm nic nie robi, w dokumentacji napisalem ze klasa
-zostala stworzona dla czytelnosci kodu
-
--moze powinnismy ujednolicic wylapywanie invalid inputu w calym programie
-bo mamy na pare roznych sposobow to napisane
-
-DONE
--jesli chest zawsze ma te same itemy to imo powinnismy dodawanie itemow zrobic juz w
-konstruktorze Chesta
-
-*/
-//DONE
-//POPRAWIC SHIELDA BO GOWNO DAJE I ZABIERA HP
-//DONE
-//ZMODYFIKOWAC ITEMY W SKRZYNCE TAK ABY TEZ ZABIERALY HP , WD itd...
 
 using namespace std;
 
-
-// problem z wyświetlaniem current atributes poza walką
-// typy bosów
 
 
 bool is_done(Player& player)
@@ -55,7 +32,6 @@ void plot()
     int mercy = 0;
     Gameplay game;
     Chest chest = Chest();
-    // chest.add_items();
     Player player(100, 10, 1);
 
 
@@ -190,7 +166,6 @@ they refuse to help you." << endl;
             delete traders;
 
 cout<<"You managed to kill all of the traders and take the resources that you need for your jurney.\n"<<endl;
-            // można by tu dodać jeszcze opcję ze skrzynią np?
         }
         else if (opt10[0] == 'N' || opt10[0] == 'n')
         {
@@ -426,9 +401,6 @@ You enter a room without knowing if you will leave it alive"<<endl;
         }
     }
     cout<<"You saved humanity and solved energy problem on Earth"<<endl;
-    // na koniec dałbym creditsy
-    cout<<'Thank you for playing our game. We hope you enjoyed it.\n\
-    Game made by:\nAdam Rybojad\nMikołaj Wewiór\nFilip Szczygielski'<<endl;
 }
 
 int main()
@@ -464,8 +436,7 @@ int main()
         }
     }
     plot();
-    //  może zrobić plota jako inta który zwraca mercy
-    //  i wtedy zaelżnie od wartości mercy oraz przejscia gry
-    //  wylosujemy odpowiednie zlaiczenie
-    cout << "Hopefully the whole jurney and achived ECTS-30 will help you graduating from ELKA :)"<<endl;
+    cout << "Hopefully the whole jurney and achived ECTS-30 will help you graduating from ELKA :)\n"<<endl;
+    cout<<"Thank you for playing our game. We hope you enjoyed it.\n\
+    Game made by:\nAdam Rybojad\nMikołaj Wewiór\nFilip Szczygielski"<<endl;
 }

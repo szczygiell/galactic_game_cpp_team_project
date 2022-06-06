@@ -1,8 +1,8 @@
-main_game: main_game.o Player.o Gameplay.o Chest.o
-	g++ -o main_game main_game.o Player.o Gameplay.o Chest.o
+game_launcher: main_game.o Player.o Gameplay.o Chest.o
+	g++ -o game_launcher.out main_game.o Player.o Gameplay.o Chest.o
 
 tests: tests.o Player.o Gameplay.o Chest.o
-	g++ -o tests tests.o Player.o Gameplay.o Chest.o
+	g++ -o tests.out tests.o Player.o Gameplay.o Chest.o
 
 
 tests.o: tests.cpp Player.h Person.h Enemy.h Item.h Boss.h Gameplay.h Chest.h
@@ -21,4 +21,4 @@ Player.o: Player.cpp
 	g++ -c Player.cpp
 
 clean:
-	del "Player.o" "Item.o" "Gameplay.o" "tests.exe" "Chest.o" "main_game.exe" "main_game.o" "tests.o"
+	rm -f Player.o Item.o Gameplay.o tests.exe Chest.o main_game.exe main_game main_game.o* tests.o game_launcher.out

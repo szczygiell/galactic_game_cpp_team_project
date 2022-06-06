@@ -6,9 +6,8 @@
 using namespace std;
 
 #include<unistd.h>
-const unsigned int microsecond = 500000;
-// nie wiem czy to dobry pomysł z globalną zmienną ale na pewno jest to wygodne
 
+const unsigned int microsecond = 500000;
 
 void disp_border()
 {

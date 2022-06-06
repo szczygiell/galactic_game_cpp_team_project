@@ -3,12 +3,6 @@
 #include "Item.h"
 #pragma once
 
-/*
-Pomysł na bossa który po pokonaniu wyrzucałby dodatkowe itemy
-np jakas bron, tarcza albo po prostu by wyswietlane bylo że nasze
-atrybuty zostały poprawione
-*/
-
 
 class Boss: public Enemy
 {
