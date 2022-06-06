@@ -275,8 +275,11 @@ you will have to fight them."<<endl;
             mercy++;
             cond2 =false;
             string ans;
-            cout << "\nZAGADKA" << endl; // trzeba wymyślić/znaleść zagadkę
-            cout << "1. odp1 \n2. odp2 \n3. odp3 \n4. odp 4"<<endl;
+            cout << "\nZAGADKA!" << endl;
+            cout << "\nW 2016 roku pan Jakub zapytany o rok swoich urodzin odpowiedział:\n\
+<<Jeżeli mój wiek z przed 36 lat pomnożysz przez mój wiek za 55 lat to otrzymasz moją datę urodzin.\n\
+W którym roku się urodziłem?>>\n\n" << endl;
+            cout << "1. 1958 \n2. 1962 \n3. 1970 \n4. 1998"<<endl;
             cout << "Choose correct answear"<<endl;
             cin >> ans;
             if(ans[0] == '2')
