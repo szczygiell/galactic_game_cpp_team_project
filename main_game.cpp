@@ -436,6 +436,6 @@ int main()
     }
     plot();
     cout << "Hopefully the whole jurney and achived ECTS-30 will help you graduating from ELKA :)\n"<<endl;
-    cout<<"Thank you for playing our game. We hope you enjoyed it.\n" << endl;
-    cout <<"Game made by:\nAdam Rybojad\nFilip Szczygielski\nMikołaj Wewiór"<<endl;
+    cout<<"\n\nThank you for playing our game. We hope you enjoyed it.\n" << endl;
+    cout <<"Game made by:\nAdam Rybojad,\nFilip Szczygielski,\nMikołaj Wewiór.\n\n"<<endl;
 }
