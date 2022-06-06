@@ -47,7 +47,7 @@ we will call ECTS-30\n\n\n\n";
     cin.get();
     cout << "Your landing is spotted by air guards\n"<< endl;
     Enemy* air_guard = new Enemy("Air guards", 30, 10, 1);
-    // game.battle(player, *air_guard);
+    game.battle(player, *air_guard);
     if (is_done(player))
         return;
     delete air_guard;
@@ -240,13 +240,13 @@ cout<<"\n\nHint:\nAll of your actions have a huge impact on the surrounding worl
 
 // Planeta 3:
 
-    cout <<"With small particle of ECTS-30 you decided to contact the best expert on ECTS, Proffesor Little Coat.\n\
-    After long journey you finally arrived at PROI-25, planet where proffesor had his lab. \n\
-    Unfortunately, you did not find the professor at his place, the whole laboratory was broken\n\
-    and you could see at first glance that there was a fight here. After searching for a while,\n\
-    you found a card left by former corrupt students who kidnapped the scientist and want\n\
-    to take revenge on him for the wasted years at the university.\n\
-    Without hesitating, you followed the kidnappers"<<endl;
+cout <<"With small particle of ECTS-30 you decided to contact the best expert on ECTS, Proffesor Little Coat.\n\
+After long journey you finally arrived at PROI-25, planet where proffesor had his lab. \n\
+Unfortunately, you did not find the professor at his place, the whole laboratory was broken\n\
+and you could see at first glance that there was a fight here. After searching for a while,\n\
+you found a card left by former corrupt students who kidnapped the scientist and want\n\
+to take revenge on him for the wasted years at the university.\n\
+Without hesitating, you followed the kidnappers"<<endl;
     cin.get();
 
     if (rand() % 4 == 0)
@@ -257,10 +257,10 @@ cout<<"\n\nHint:\nAll of your actions have a huge impact on the surrounding worl
         return;
 
     }
-    cout<<"tracking down students was not difficult thanks to their distinctive smell\n\
-    and after a while you managed to reach their hideout. You jump in, but the terrified kidnappers don't defend themselves,\n\
-    they just offer you a deal. If you guess their riddle, you will disperse without a fight, and if you guess wrong,\n\
-    you will have to fight them."<<endl;
+cout<<"tracking down students was not difficult thanks to their distinctive smell\n\
+and after a while you managed to reach their hideout. You jump in, but the terrified kidnappers don't defend themselves,\n\
+they just offer you a deal. If you guess their riddle, you will disperse without a fight, and if you guess wrong,\n\
+you will have to fight them."<<endl;
 
     cout << "Do you want to hear the riddle?"<<endl;
     cout << "\t\t(y/Y) yes " <<endl;
@@ -320,13 +320,13 @@ cout<<"\n\nHint:\nAll of your actions have a huge impact on the surrounding worl
             cout<<"Enter valid value"<<endl;
         }
     }
-    cout << "Back in the lab, the professor took a small ECTS sample from you and tested it.\n\
-    Thanks to this, he was able to determine where the largest deposits of this material are located in the area.\n\
-    One was not far away, unfortunately it was very well guarded. You decided there was no time to waste and set out to save humanity"<<endl;
+cout << "Back in the lab, the professor took a small ECTS sample from you and tested it.\n\
+Thanks to this, he was able to determine where the largest deposits of this material are located in the area.\n\
+One was not far away, unfortunately it was very well guarded. You decided there was no time to waste and set out to save humanity"<<endl;
     cin.get();
 
-    cout<<"You've reached your destination, but trouble has started here,\n\
-    well-armed bodyguards are standing at the entrance"<<endl;
+cout<<"You've reached your destination, but trouble has started here,\n\
+well-armed bodyguards are standing at the entrance"<<endl;
     Enemy* body_guards = new Enemy("Fearless body-guards", 60, 17, 4);
     cin.get();
     game.battle(player, *body_guards);
@@ -348,8 +348,8 @@ You enter a room without knowing if you will leave it alive"<<endl;
     cin.get();
     if(mercy >=2)
     {
-        cout<<"Thanks to your nobility, the thesis handed ECTS-30 without a fight\n\
-        sand you managed to save humanity"<<endl;
+cout<<"Thanks to your nobility, the thesis handed ECTS-30 without a fight\n\
+sand you managed to save humanity"<<endl;
         cin.get();
         Boss* thesis = new Boss("Engineering thesis", 0, 10, 4, *(new Item("ECTS-30", 30, 1)));
         game.boss_battle(player, *thesis);
@@ -360,16 +360,16 @@ You enter a room without knowing if you will leave it alive"<<endl;
     else
     {
         string ans2;
-        cout << "Rozważmy następujący fragment kodu:\nstruct Klasa:\n{\nint a;\npublic:\nint b;\n\
-        private:\nint c;\n};\nKtóre z pól klasy Klasa są widoczne prywatnie?\n\nWybierz jedną odpowiedź:\n\
-        1) a i c\n2) tylko c\n 3)tylko a\n4) b i c" << endl;
+cout << "Rozważmy następujący fragment kodu:\n\nstruct Klasa:\n{\n\tint a;\npublic:\n\tint b;\n\
+private:\n\tint c;\n};\nKtóre z pól klasy Klasa są widoczne prywatnie?\n\nWybierz jedną odpowiedź:\n\n\
+1) a i c\n2) tylko c\n3)tylko a\n4) b i c\n"<< endl;
         cout << "1. odp1 \n2. odp2 \n3. odp3 \n4. odp 4"<<endl;
         cout << "Choose correct answear"<<endl;
         cin >> ans2;
         if(ans2[0] == '2')
         {
-            cout<<"Engineering thesis is surprised by your correct answer, you are very well prepared\n\
-            and the thesis attacks with much less force than normal."<<endl;
+cout<<"Engineering thesis is surprised by your correct answer, you are very well prepared\n\
+and the thesis attacks with much less force than normal."<<endl;
             cin.get();
             Boss* thesis = new Boss("Engineering thesis", 50, 10, 4, *(new Item("ECTS-30", 30, 1)));
             game.boss_battle(player, *thesis);
@@ -379,8 +379,8 @@ You enter a room without knowing if you will leave it alive"<<endl;
         }
         else if(ans2[0] == '1' || ans2[0] == '3' || ans2[0] == '4')
         {
-            cout<<"Unfortunately, your answer is wrong, the thesis attacks with all its might,\n\
-            your lack of preparation can destroy you"<<endl;
+cout<<"Unfortunately, your answer is wrong, the thesis attacks with all its might,\n\
+your lack of preparation can destroy you"<<endl;
             cin.get();
             Boss* thesis = new Boss("Engineering thesis", 100, 20, 4, *(new Item("ECTS-30", 30, 1)));
             game.boss_battle(player, *thesis);
@@ -390,8 +390,8 @@ You enter a room without knowing if you will leave it alive"<<endl;
         }
         else
         {
-            cout<<"You talked nonsense and the thesis attacks with all its might,\n\
-            your lack of preparation can destroy you"<<endl;
+cout<<"You talked nonsense and the thesis attacks with all its might,\n\
+your lack of preparation can destroy you"<<endl;
             cin.get();
             Boss* thesis = new Boss("Engineering thesis", 100, 20, 4, *(new Item("ECTS-30", 30, 1)));
             game.boss_battle(player, *thesis);
@@ -437,6 +437,6 @@ int main()
     }
     plot();
     cout << "Hopefully the whole jurney and achived ECTS-30 will help you graduating from ELKA :)\n"<<endl;
-    cout<<"Thank you for playing our game. We hope you enjoyed it.\n\
-    Game made by:\nAdam Rybojad\nMikołaj Wewiór\nFilip Szczygielski"<<endl;
+    cout<<"Thank you for playing our game. We hope you enjoyed it.\n" << endl;
+    cout <<"Game made by:\nAdam Rybojad\nMikołaj Wewiór\nFilip Szczygielski"<<endl;
 }
